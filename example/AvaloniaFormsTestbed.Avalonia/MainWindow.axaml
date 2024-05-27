@@ -1,0 +1,21 @@
+<avaloniaForms:FormsApplicationPage
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:avaloniaForms="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI;assembly=Xamarin.Forms.Platform.AvaloniaUI"
+    xmlns:af="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;assembly=Xamarin.Forms.Platform.AvaloniaUI"
+    xmlns:local="clr-namespace:AvaloniaFormsTestbed.Avalonia;assembly=AvaloniaFormsTestbed.Avalonia"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    x:Class="AvaloniaFormsTestbed.Avalonia.MainWindow"
+    x:DataType="local:MainWindow"
+    Background="Blue"
+    Title="AvaloniaFormsTestbed.Avalonia">
+    <af:DynamicContentControl
+        Name="PART_ContentControl"
+        ContentLoader="{Binding ContentLoader}"
+        Source="{Binding StartupPage}"
+        IsVisible="{Binding !HasModalPage}"
+        Width="500"
+        Height="500"/>
+</avaloniaForms:FormsApplicationPage>

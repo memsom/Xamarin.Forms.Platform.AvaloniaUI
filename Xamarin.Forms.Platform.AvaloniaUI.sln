@@ -1,0 +1,40 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaFormsTestbed.Avalonia", "example\AvaloniaFormsTestbed.Avalonia\AvaloniaFormsTestbed.Avalonia.csproj", "{824CC15E-7A3C-4F1C-985F-A648147721BF}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Xamarin.Forms.Platform.AvaloniaUI", "source\Xamarin.Forms.Platform.AvaloniaUI\Xamarin.Forms.Platform.AvaloniaUI.csproj", "{405668F9-9D2C-4D83-9D51-F14BBC26C432}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AvaloniaFormsTestbed", "example\AvaloniaFormsTestbed\AvaloniaFormsTestbed.csproj", "{2410C642-52DD-451A-8873-528748535421}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Example", "Example", "{0B406D9F-C2F7-413C-8EF6-C1361DF281F2}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{F101773B-9429-454D-A302-61827539F44A}"
+	ProjectSection(SolutionItems) = preProject
+		.gitignore = .gitignore
+		readme.md = readme.md
+	EndProjectSection
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{824CC15E-7A3C-4F1C-985F-A648147721BF}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{824CC15E-7A3C-4F1C-985F-A648147721BF}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{824CC15E-7A3C-4F1C-985F-A648147721BF}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{824CC15E-7A3C-4F1C-985F-A648147721BF}.Release|Any CPU.Build.0 = Release|Any CPU
+		{405668F9-9D2C-4D83-9D51-F14BBC26C432}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{405668F9-9D2C-4D83-9D51-F14BBC26C432}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{405668F9-9D2C-4D83-9D51-F14BBC26C432}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{405668F9-9D2C-4D83-9D51-F14BBC26C432}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2410C642-52DD-451A-8873-528748535421}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2410C642-52DD-451A-8873-528748535421}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2410C642-52DD-451A-8873-528748535421}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2410C642-52DD-451A-8873-528748535421}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{2410C642-52DD-451A-8873-528748535421} = {0B406D9F-C2F7-413C-8EF6-C1361DF281F2}
+		{824CC15E-7A3C-4F1C-985F-A648147721BF} = {0B406D9F-C2F7-413C-8EF6-C1361DF281F2}
+	EndGlobalSection
+EndGlobal
