@@ -2,9 +2,9 @@ using System.ComponentModel;
 using System.Diagnostics;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.AvaloniaUI;
+using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
-using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 
 [assembly: ExportRenderer(typeof(Page), typeof(PageRenderer))]
 namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;

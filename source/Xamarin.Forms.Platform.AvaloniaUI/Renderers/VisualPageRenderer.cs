@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using Avalonia.Media;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
@@ -57,17 +58,17 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
 
     void UpdateBackButton()
     {
-        this.Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
+        Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
     }
 
     void UpdateBackButtonTitle()
     {
-        this.Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
+        Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
     }
 
     void UpdateNavigationBarVisible()
     {
-        this.Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
+        Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
     }
 
     protected override async void UpdateBackground()
@@ -133,7 +134,7 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         base.Disappearing();
     }
 
-    private void VisualPageRenderer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private void VisualPageRenderer_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
         UpdateToolbar();
     }

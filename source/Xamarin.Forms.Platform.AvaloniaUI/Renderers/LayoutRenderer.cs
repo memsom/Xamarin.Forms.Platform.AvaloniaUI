@@ -2,9 +2,9 @@ using System.ComponentModel;
 using Avalonia.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.AvaloniaUI;
-using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 [assembly: ExportRenderer(typeof(Layout), typeof(LayoutRenderer))]
 
@@ -68,7 +68,7 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
             if (view == null)
                 return;
 
-            Control native = Platform.GetRenderer(view)?.GetNativeElement() as Control;
+            Control native = Platform.GetRenderer(view)?.GetNativeElement();
             if (native != null)
             {
                 Control.Children.Remove(native);

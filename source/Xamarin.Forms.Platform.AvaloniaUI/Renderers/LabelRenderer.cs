@@ -20,7 +20,7 @@ public class LabelRenderer : ViewRenderer<Label, TextBlock>
 		{
 			if (Control == null) // construct and SetNativeControl and suscribe control event
 			{
-				SetNativeControl(new TextBlock() { });
+				SetNativeControl(new TextBlock());
 			}
 
 			// Update control property
@@ -217,7 +217,6 @@ public class LabelRenderer : ViewRenderer<Label, TextBlock>
 	{
 		if(Control == null || Element == null)
 		{
-			return;
 		}
 
 		//Control.Padding = new AThickness(

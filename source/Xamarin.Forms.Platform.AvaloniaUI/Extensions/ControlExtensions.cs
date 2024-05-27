@@ -6,7 +6,7 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 
 public static class ControlExtensions
 {
-    public static object UpdateDependencyColor(this AvaloniaObject depo, AvaloniaProperty dp, Color newColor)
+    public static object UpdateDependencyColor(this AvaloniaObject? depo, AvaloniaProperty dp, Color newColor)
     {
         if (!newColor.IsDefault)
             depo.SetValue(dp, newColor.ToBrush());

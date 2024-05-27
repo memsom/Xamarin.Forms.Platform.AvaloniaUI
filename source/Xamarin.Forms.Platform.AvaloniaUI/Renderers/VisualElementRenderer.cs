@@ -1,6 +1,8 @@
 using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
+using Avalonia.Layout;
 using Avalonia.Media;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using AvaloniaRect = Avalonia.Rect;
@@ -19,7 +21,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
     event EventHandler _controlChanged;
     VisualElementTracker<TElement, TNativeElement> _tracker;
     Control _containingPage; // Cache of containing page used for unfocusing
-    Control _control => Control as Control;
+    Control _control => Control;
 
     Canvas _backgroundLayer;
 
@@ -35,7 +37,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
 
     protected virtual bool PreventGestureBubbling { get; set; } = false;
 
-    IElementController ElementController => Element as IElementController;
+    IElementController ElementController => Element;
 
     protected VisualElementTracker<TElement, TNativeElement> Tracker
     {
@@ -95,7 +97,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
     {
         if (Children.Count == 0 || Control == null) return new SizeRequest();
 
-        var constraint = new global::Avalonia.Size(widthConstraint, heightConstraint);
+        var constraint = new Avalonia.Size(widthConstraint, heightConstraint);
         TNativeElement child = Control;
 
         child.Measure(constraint);
@@ -167,7 +169,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
         remove { _controlChanged -= value; }
     }
 
-    protected override global::Avalonia.Size ArrangeOverride(global::Avalonia.Size finalSize)
+    protected override Avalonia.Size ArrangeOverride(Avalonia.Size finalSize)
     {
         if (Element == null || finalSize.Width * finalSize.Height == 0) return finalSize;
 
@@ -210,8 +212,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
                     // don't try to rearrange renderers that were just arranged,
                     // lest you suffer a layout cycle
                     continue;
-                else
-                    nativeChild.Arrange(myRect);
+                nativeChild.Arrange(myRect);
             }
         }
 
@@ -244,9 +245,9 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
         SetElement(null);
     }
 
-    protected override global::Avalonia.Size MeasureOverride(global::Avalonia.Size availableSize)
+    protected override Avalonia.Size MeasureOverride(Avalonia.Size availableSize)
     {
-        if (Element == null || availableSize.Width * availableSize.Height == 0) return new global::Avalonia.Size(0, 0);
+        if (Element == null || availableSize.Width * availableSize.Height == 0) return new Avalonia.Size(0, 0);
 
         Element.IsInNativeLayout = true;
 
@@ -262,7 +263,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
 
         double width = Math.Max(0, Element.Width);
         double height = Math.Max(0, Element.Height);
-        var result = new global::Avalonia.Size(width, height);
+        var result = new Avalonia.Size(width, height);
         if (Control != null)
         {
             double w = Element.Width;
@@ -279,7 +280,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
 
             w = Math.Max(0, w);
             h = Math.Max(0, h);
-            Control.Measure(new global::Avalonia.Size(w, h));
+            Control.Measure(new Avalonia.Size(w, h));
         }
 
         Element.IsInNativeLayout = false;
@@ -345,8 +346,8 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
             return;
         }
 
-        Control.HorizontalAlignment = global::Avalonia.Layout.HorizontalAlignment.Stretch;
-        Control.VerticalAlignment = global::Avalonia.Layout.VerticalAlignment.Stretch;
+        Control.HorizontalAlignment = HorizontalAlignment.Stretch;
+        Control.VerticalAlignment = VerticalAlignment.Stretch;
 
         if (Element == null)
             throw new InvalidOperationException(
@@ -365,7 +366,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
     }
 
 
-    private void OnAttachedToVisualTree(object sender, global::Avalonia.VisualTreeAttachmentEventArgs e)
+    private void OnAttachedToVisualTree(object sender, VisualTreeAttachmentEventArgs e)
     {
         Control.AttachedToVisualTree -= OnAttachedToVisualTree;
         Control_Loaded(sender, new RoutedEventArgs());
@@ -377,7 +378,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
         Appearing();
     }
 
-    private void OnDetachedFromVisualTree(object sender, global::Avalonia.VisualTreeAttachmentEventArgs e)
+    private void OnDetachedFromVisualTree(object sender, VisualTreeAttachmentEventArgs e)
     {
         Control.DetachedFromVisualTree -= OnDetachedFromVisualTree;
         Control_Unloaded(sender, new RoutedEventArgs());

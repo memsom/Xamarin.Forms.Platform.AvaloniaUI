@@ -1,5 +1,7 @@
 using System.ComponentModel;
+using Avalonia;
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Avalonia.Interactivity;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using AvaloniaSize = Avalonia.Size;
@@ -14,7 +16,7 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
     VisualElementTracker? tracker;
     bool disposed;
 
-    IElementController? ElementController => Element as IElementController;
+    IElementController? ElementController => Element;
 
     public TNativeElement? Control { get; private set; }
 
@@ -199,7 +201,7 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
         UpdateHeight();
     }
 
-    private void Control_AttachedToVisualTree(object? sender, global::Avalonia.VisualTreeAttachmentEventArgs e)
+    private void Control_AttachedToVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
         Control.AttachedToVisualTree -= Control_AttachedToVisualTree;
         Control_Loaded(sender, new RoutedEventArgs());
@@ -211,7 +213,7 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
         Appearing();
     }
 
-    private void Control_DetachedFromVisualTree(object? sender, global::Avalonia.VisualTreeAttachmentEventArgs e)
+    private void Control_DetachedFromVisualTree(object? sender, VisualTreeAttachmentEventArgs e)
     {
         Control.DetachedFromVisualTree -= Control_DetachedFromVisualTree;
         Control_Unloaded(sender, new RoutedEventArgs());
@@ -234,9 +236,9 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
 
     protected virtual void UpdateBackground()
     {
-        if (Control is global::Avalonia.Controls.Primitives.TemplatedControl templatedControl)
+        if (Control is TemplatedControl templatedControl)
         {
-            templatedControl?.UpdateDependencyColor(global::Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, Element.BackgroundColor);
+            templatedControl?.UpdateDependencyColor(TemplatedControl.BackgroundProperty, Element.BackgroundColor);
         }
     }
 

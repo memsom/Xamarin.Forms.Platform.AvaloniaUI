@@ -9,7 +9,7 @@ public partial class MainWindow : FormsApplicationPage
     {
         InitializeComponent();
 
-        Xamarin.Forms.Forms.Init();
+        Forms.Init();
         LoadApplication(new AvaloniaFormsTestbed.App());
     }
 }
