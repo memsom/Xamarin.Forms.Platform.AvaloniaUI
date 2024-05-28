@@ -9,7 +9,7 @@ public class PathIcon : ElementIcon
 
     public Geometry Data
     {
-        get => (Geometry)GetValue(DataProperty);
+        get => GetValue(DataProperty);
         set => SetValue(DataProperty, value);
     }
 }

@@ -8,7 +8,7 @@ public class SymbolIcon : ElementIcon
 
     public Symbol Symbol
     {
-        get => (Symbol)GetValue(SymbolProperty);
+        get => GetValue(SymbolProperty);
         set => SetValue(SymbolProperty, value);
     }
 }

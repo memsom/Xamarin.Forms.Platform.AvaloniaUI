@@ -21,7 +21,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
 
     public object CurrentPage
     {
-        get { return (object)GetValue(CurrentPageProperty); }
+        get { return GetValue(CurrentPageProperty); }
         set { SetValue(CurrentPageProperty, value); }
     }
 
@@ -30,7 +30,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
     public NavigationPage(object root)
         : this()
     {
-        this.Push(root);
+        Push(root);
     }
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
@@ -168,7 +168,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
     {
         if (StackDepth > 1)
         {
-            return this.InternalChildren[StackDepth - 2].GetPropValue<string>("Title") ?? "Back";
+            return InternalChildren[StackDepth - 2].GetPropValue<string>("Title") ?? "Back";
         }
 
         return "";

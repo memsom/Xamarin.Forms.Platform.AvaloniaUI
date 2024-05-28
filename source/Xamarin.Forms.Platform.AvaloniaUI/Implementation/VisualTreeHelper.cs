@@ -24,7 +24,7 @@ public static class VisualTreeHelper
     /// <returns>The first parent item that matches the submitted
     /// type parameter. If not matching item can be found, a null
     /// reference is being returned.</returns>
-    public static T TryFindParent<T>(this Visual child)
+    public static T? TryFindParent<T>(this Visual child)
         where T : Visual
     {
         //get parent item
@@ -34,8 +34,7 @@ public static class VisualTreeHelper
         if (parentObject == null) return null;
 
         //check if the parent matches the type we're looking for
-        T parent = parentObject as T;
-        return parent ?? TryFindParent<T>(parentObject);
+        return parentObject as T ?? TryFindParent<T>(parentObject);
     }
 
     /// <summary>

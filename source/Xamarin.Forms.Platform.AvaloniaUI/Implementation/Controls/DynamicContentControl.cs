@@ -22,13 +22,13 @@ public class DynamicContentControl : ContentControl, IStyleable
 
     public object Source
     {
-        get { return (object)GetValue(SourceProperty); }
+        get { return GetValue(SourceProperty); }
         set { SetValue(SourceProperty, value); }
     }
 
     public IContentLoader ContentLoader
     {
-        get { return (IContentLoader)GetValue(ContentLoaderProperty); }
+        get { return GetValue(ContentLoaderProperty); }
         set { SetValue(ContentLoaderProperty, value); }
     }
 
@@ -93,10 +93,10 @@ public class DynamicContentControl : ContentControl, IStyleable
         if (newValue != null && newValue.Equals(oldValue)) return;
 
         var localTokenSource = new CancellationTokenSource();
-        this.tokenSource = localTokenSource;
+        tokenSource = localTokenSource;
 
         var scheduler = TaskScheduler.FromCurrentSynchronizationContext();
-        var task = this.ContentLoader.LoadContentAsync(this, oldValue, newValue, this.tokenSource.Token);
+        var task = ContentLoader.LoadContentAsync(this, oldValue, newValue, tokenSource.Token);
 
         task.ContinueWith(t =>
         {
@@ -104,7 +104,7 @@ public class DynamicContentControl : ContentControl, IStyleable
             {
                 if (t.IsFaulted || t.IsCanceled || localTokenSource.IsCancellationRequested)
                 {
-                    this.Content = null;
+                    Content = null;
                 }
                 else
                 {
@@ -112,29 +112,28 @@ public class DynamicContentControl : ContentControl, IStyleable
                     {
                         if (control.Parent != null)
                         {
-                            this.Content = control.Parent;
+                            Content = control.Parent;
                         }
                         else
                         {
-                            this.Content = control;
+                            Content = control;
                         }
                     }
                     else
                     {
-                        this.Content = t.Result;
+                        Content = t.Result;
                     }
                 }
             }
             finally
             {
-                if (this.tokenSource == localTokenSource)
+                if (tokenSource == localTokenSource)
                 {
-                    this.tokenSource = null;
+                    tokenSource = null;
                 }
 
                 localTokenSource.Dispose();
             }
         }, scheduler);
-        return;
     }
 }

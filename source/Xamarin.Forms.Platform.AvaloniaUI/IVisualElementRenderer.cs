@@ -4,11 +4,11 @@ namespace Xamarin.Forms.Platform.AvaloniaUI;
 
 public interface IVisualElementRenderer : IRegisterable, IDisposable
 {
-    Control ContainerElement { get; }
+    Control? ContainerElement { get; }
 
-    Control GetNativeElement();
+    Control? GetNativeElement();
 
-    VisualElement Element { get; }
+    VisualElement? Element { get; }
 
     event EventHandler<VisualElementChangedEventArgs> ElementChanged;
 

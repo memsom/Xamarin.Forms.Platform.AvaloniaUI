@@ -7,13 +7,12 @@
     BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout>
-            <BoxView BackgroundColor="Red" />
-            <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
-                <Button Text="something" Clicked="Button_OnClicked" />
-                <Label x:Name="Label1" Text="test" />
-                <!-- <CheckBox IsChecked="True" BackgroundColor="Green" HorizontalOptions="Center" VerticalOptions="Center" /> -->
-                <BoxView BackgroundColor="Red" />
-            </StackLayout>
+            <BoxView BackgroundColor="Brown" WidthRequest="20" HeightRequest="20" />
+            <CheckBox />
+            <!-- <StackLayout Orientation="Vertical" BackgroundColor="Yellow"> -->
+            <!--     <Button Text="something" Clicked="Button_OnClicked" /> -->
+            <!--     <Label x:Name="Label1" Text="test" /> -->
+            <!-- </StackLayout> -->
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

@@ -12,8 +12,8 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
 {
-    IElementController ElementController => Element as IElementController;
-    bool _isZChanged;
+    IElementController? ElementController => Element;
+    bool isZChanged;
 
     protected override void OnElementChanged(ElementChangedEventArgs<Layout> e)
     {
@@ -40,26 +40,33 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
         base.OnElementChanged(e);
     }
 
-    void HandleChildAdded(object sender, ElementEventArgs e)
+    void HandleChildAdded(object? sender, ElementEventArgs e)
     {
         UiHelper.ExecuteInUiThread(() =>
         {
             var view = e.Element as VisualElement;
 
-            if (view == null)
-                return;
-
-            IVisualElementRenderer renderer;
-            Platform.SetRenderer(view, renderer = Platform.CreateRenderer(view));
-            Control.Children.Add(renderer.GetNativeElement());
-            if (_isZChanged)
+            if (view == null || Control == null)
             {
-                EnsureZIndex();
+                return;
+            }
+
+            if (Platform.CreateRenderer(view) is { } renderer)
+            {
+                Platform.SetRenderer(view, renderer);
+                if (renderer.GetNativeElement() is { } nativeElement)
+                {
+                    Control.Children.Add(nativeElement);
+                }
+                if (isZChanged)
+                {
+                    EnsureZIndex();
+                }
             }
         });
     }
 
-    void HandleChildRemoved(object sender, ElementEventArgs e)
+    void HandleChildRemoved(object? sender, ElementEventArgs e)
     {
         UiHelper.ExecuteInUiThread(() =>
         {
@@ -73,7 +80,7 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
             {
                 Control.Children.Remove(native);
                 view.Cleanup();
-                if (_isZChanged)
+                if (isZChanged)
                 {
                     EnsureZIndex();
                 }
@@ -81,7 +88,7 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
         });
     }
 
-    void HandleChildrenReordered(object sender, EventArgs e)
+    void HandleChildrenReordered(object? sender, EventArgs e)
     {
         EnsureZIndex();
     }
@@ -89,23 +96,31 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
     void EnsureZIndex()
     {
         if (ElementController.LogicalChildren.Count == 0)
+        {
             return;
+        }
 
         for (var z = 0; z < ElementController.LogicalChildren.Count; z++)
         {
             var child = ElementController.LogicalChildren[z] as VisualElement;
             if (child == null)
+            {
                 continue;
+            }
 
             IVisualElementRenderer childRenderer = Platform.GetRenderer(child);
 
             if (childRenderer == null)
+            {
                 continue;
+            }
 
             if (CanvasExtensions.GetZIndex(childRenderer.GetNativeElement()) != (z + 1))
             {
-                if (!_isZChanged)
-                    _isZChanged = true;
+                if (!isZChanged)
+                {
+                    isZChanged = true;
+                }
 
                 CanvasExtensions.SetZIndex(childRenderer.GetNativeElement(), z + 1);
             }

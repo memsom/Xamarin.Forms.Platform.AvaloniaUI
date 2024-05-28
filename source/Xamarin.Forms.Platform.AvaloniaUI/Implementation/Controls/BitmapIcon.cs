@@ -14,12 +14,8 @@ public class BitmapIcon : ElementIcon
 
     public Uri UriSource
     {
-        get => (Uri)GetValue(UriSourceProperty);
+        get => GetValue(UriSourceProperty);
         set => SetValue(UriSourceProperty, value);
-    }
-
-    public BitmapIcon()
-    {
     }
 
     private void OnUriSourcePropertyChanged(AvaloniaPropertyChangedEventArgs e)

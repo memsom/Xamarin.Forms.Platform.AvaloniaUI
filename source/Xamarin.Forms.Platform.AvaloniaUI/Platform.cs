@@ -31,7 +31,6 @@ public abstract class Platform : BindableObject, INavigation
     {
         pageInstance = page;
 
-
         var busyCount = 0;
         MessagingCenter.Subscribe(this, Page.BusySetSignalName, (Page sender, bool enabled) =>
         {

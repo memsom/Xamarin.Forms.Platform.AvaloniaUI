@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
@@ -29,73 +30,73 @@ public class DynamicContentPage : UserControl
 
     public IContentLoader ContentLoader
     {
-        get => (IContentLoader)GetValue(ContentLoaderProperty);
+        get => GetValue(ContentLoaderProperty);
         set => SetValue(ContentLoaderProperty, value);
     }
 
     public Avalonia.Media.Brush TitleBarBackgroundColor
     {
-        get => (Avalonia.Media.Brush)GetValue(TitleBarBackgroundColorProperty);
+        get => GetValue(TitleBarBackgroundColorProperty);
         set => SetValue(TitleBarBackgroundColorProperty, value);
     }
 
     public Avalonia.Media.Brush TitleBarTextColor
     {
-        get => (Avalonia.Media.Brush)GetValue(TitleBarTextColorProperty);
+        get => GetValue(TitleBarTextColorProperty);
         set => SetValue(TitleBarTextColorProperty, value);
     }
 
     public string Title
     {
-        get => (string)GetValue(TitleProperty);
+        get => GetValue(TitleProperty);
         set => SetValue(TitleProperty, value);
     }
 
     public string BackButtonTitle
     {
-        get => (string)GetValue(BackButtonTitleProperty);
+        get => GetValue(BackButtonTitleProperty);
         set => SetValue(BackButtonTitleProperty, value);
     }
 
     public bool HasNavigationBar
     {
-        get => (bool)GetValue(HasNavigationBarProperty);
+        get => GetValue(HasNavigationBarProperty);
         set => SetValue(HasNavigationBarProperty, value);
     }
 
     public bool HasBackButton
     {
-        get => (bool)GetValue(HasBackButtonProperty);
+        get => GetValue(HasBackButtonProperty);
         set => SetValue(HasBackButtonProperty, value);
     }
 
     public ObservableCollection<Control> PrimaryTopBarCommands
     {
-        get => (ObservableCollection<Control>)GetValue(PrimaryTopBarCommandsProperty);
+        get => GetValue(PrimaryTopBarCommandsProperty);
         set => SetValue(PrimaryTopBarCommandsProperty, value);
     }
 
     public ObservableCollection<Control> SecondaryTopBarCommands
     {
-        get => (ObservableCollection<Control>)GetValue(SecondaryTopBarCommandsProperty);
+        get => GetValue(SecondaryTopBarCommandsProperty);
         set => SetValue(SecondaryTopBarCommandsProperty, value);
     }
 
     public ObservableCollection<Control> PrimaryBottomBarCommands
     {
-        get => (ObservableCollection<Control>)GetValue(PrimaryBottomBarCommandsProperty);
+        get => GetValue(PrimaryBottomBarCommandsProperty);
         set => SetValue(PrimaryBottomBarCommandsProperty, value);
     }
 
     public ObservableCollection<Control> SecondaryBottomBarCommands
     {
-        get => (ObservableCollection<Control>)GetValue(SecondaryBottomBarCommandsProperty);
+        get => GetValue(SecondaryBottomBarCommandsProperty);
         set => SetValue(SecondaryBottomBarCommandsProperty, value);
     }
 
     public object ContentBottomBar
     {
-        get => (object)GetValue(ContentBottomBarProperty);
+        get => GetValue(ContentBottomBarProperty);
         set => SetValue(ContentBottomBarProperty, value);
     }
 
@@ -108,22 +109,22 @@ public class DynamicContentPage : UserControl
         }
     }
 
-    public ApplicationWindow ParentWindow => this.GetParentWindow() as ApplicationWindow;
+    public ApplicationWindow? ParentWindow => this.GetParentWindow() as ApplicationWindow;
 
     public DynamicContentPage()
     {
-        this.SetValue(DynamicContentPage.PrimaryTopBarCommandsProperty, new ObservableCollection<Control>());
-        this.SetValue(DynamicContentPage.SecondaryTopBarCommandsProperty, new ObservableCollection<Control>());
-        this.SetValue(DynamicContentPage.PrimaryBottomBarCommandsProperty, new ObservableCollection<Control>());
-        this.SetValue(DynamicContentPage.SecondaryBottomBarCommandsProperty, new ObservableCollection<Control>());
+        SetValue(PrimaryTopBarCommandsProperty, new ObservableCollection<Control>());
+        SetValue(SecondaryTopBarCommandsProperty, new ObservableCollection<Control>());
+        SetValue(PrimaryBottomBarCommandsProperty, new ObservableCollection<Control>());
+        SetValue(SecondaryBottomBarCommandsProperty, new ObservableCollection<Control>());
 
         LayoutUpdated += OnLayoutUpdated;
     }
 
     #region Loaded & Unloaded
 
-    public event EventHandler<RoutedEventArgs> Loaded;
-    public event EventHandler<RoutedEventArgs> Unloaded;
+    public event EventHandler<RoutedEventArgs>? Loaded;
+    public event EventHandler<RoutedEventArgs>? Unloaded;
 
     protected override void OnAttachedToVisualTree(VisualTreeAttachmentEventArgs e)
     {
@@ -146,61 +147,65 @@ public class DynamicContentPage : UserControl
 
     protected virtual void Appearing()
     {
-        this.PrimaryTopBarCommands.CollectionChanged += Commands_CollectionChanged;
-        this.SecondaryTopBarCommands.CollectionChanged += Commands_CollectionChanged;
-        this.PrimaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
-        this.SecondaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
+        PrimaryTopBarCommands.CollectionChanged += Commands_CollectionChanged;
+        SecondaryTopBarCommands.CollectionChanged += Commands_CollectionChanged;
+        PrimaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
+        SecondaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
         //ParentWindow?.SynchronizeToolbarCommands();
         //ParentWindow?.SynchronizeAppBar();
     }
 
     protected virtual void Disappearing()
     {
-        this.PrimaryTopBarCommands.CollectionChanged -= Commands_CollectionChanged;
-        this.SecondaryTopBarCommands.CollectionChanged -= Commands_CollectionChanged;
-        this.PrimaryBottomBarCommands.CollectionChanged -= Commands_CollectionChanged;
-        this.SecondaryBottomBarCommands.CollectionChanged -= Commands_CollectionChanged;
+        PrimaryTopBarCommands.CollectionChanged -= Commands_CollectionChanged;
+        SecondaryTopBarCommands.CollectionChanged -= Commands_CollectionChanged;
+        PrimaryBottomBarCommands.CollectionChanged -= Commands_CollectionChanged;
+        SecondaryBottomBarCommands.CollectionChanged -= Commands_CollectionChanged;
     }
 
     #endregion
 
     #region LayoutUpdated & SizeChanged
 
-    public event EventHandler<EventArgs> SizeChanged;
+    public event EventHandler<EventArgs>? SizeChanged;
     protected virtual void OnSizeChanged(EventArgs e) { SizeChanged?.Invoke(this, e); }
 
-    protected virtual void OnLayoutUpdated(object sender, EventArgs e) { OnSizeChanged(e); }
+    protected virtual void OnLayoutUpdated(object? sender, EventArgs e) { OnSizeChanged(e); }
 
     #endregion
 
-    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs e)
+    protected override void OnPropertyChanged(AvaloniaPropertyChangedEventArgs change)
     {
-        base.OnPropertyChanged(e);
-        if (e.Property == TitleProperty || e.Property == HasBackButtonProperty || e.Property == HasNavigationBarProperty || e.Property == TitleBarBackgroundColorProperty || e.Property == TitleBarTextColorProperty)
+        base.OnPropertyChanged(change);
+        if (change.Property == TitleProperty ||
+            change.Property == HasBackButtonProperty ||
+            change.Property == HasNavigationBarProperty ||
+            change.Property == TitleBarBackgroundColorProperty ||
+            change.Property == TitleBarTextColorProperty)
         {
             //ParentWindow?.SynchronizeAppBar();
         }
     }
 
 
-    private void Commands_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private void Commands_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
         //ParentWindow?.SynchronizeToolbarCommands();
     }
 
-    public virtual string GetTitle() { return this.Title; }
+    public virtual string GetTitle() { return Title; }
 
-    public virtual bool GetHasNavigationBar() { return this.HasNavigationBar; }
+    public virtual bool GetHasNavigationBar() { return HasNavigationBar; }
 
-    public virtual Avalonia.Media.Brush GetTitleBarBackgroundColor() { return this.TitleBarBackgroundColor; }
+    public virtual Avalonia.Media.Brush GetTitleBarBackgroundColor() { return TitleBarBackgroundColor; }
 
-    public virtual Avalonia.Media.Brush GetTitleBarTextColor() { return this.TitleBarTextColor; }
+    public virtual Avalonia.Media.Brush GetTitleBarTextColor() { return TitleBarTextColor; }
 
-    public virtual IEnumerable<Control> GetPrimaryTopBarCommands() { return this.PrimaryTopBarCommands; }
+    public virtual IEnumerable<Control> GetPrimaryTopBarCommands() { return PrimaryTopBarCommands; }
 
-    public virtual IEnumerable<Control> GetSecondaryTopBarCommands() { return this.SecondaryTopBarCommands; }
+    public virtual IEnumerable<Control> GetSecondaryTopBarCommands() { return SecondaryTopBarCommands; }
 
-    public virtual IEnumerable<Control> GetPrimaryBottomBarCommands() { return this.PrimaryBottomBarCommands; }
+    public virtual IEnumerable<Control> GetPrimaryBottomBarCommands() { return PrimaryBottomBarCommands; }
 
-    public virtual IEnumerable<Control> GetSecondaryBottomBarCommands() { return this.SecondaryBottomBarCommands; }
+    public virtual IEnumerable<Control> GetSecondaryBottomBarCommands() { return SecondaryBottomBarCommands; }
 }

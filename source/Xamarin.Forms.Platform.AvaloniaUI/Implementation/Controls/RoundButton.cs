@@ -19,7 +19,7 @@ public class RoundButton : Avalonia.Controls.Button, IStyleable
     {
         get
         {
-            return (int)GetValue(CornerRadiusProperty);
+            return GetValue(CornerRadiusProperty);
         }
         set
         {

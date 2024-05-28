@@ -1,10 +1,10 @@
 using Avalonia;
 using Avalonia.Media;
-using Avalonia.Styling;
+using AvaloniaCheckBox = Avalonia.Controls.CheckBox;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class TintCheckBox : Avalonia.Controls.CheckBox
+public class TintCheckBox : AvaloniaCheckBox
 {
     public static readonly StyledProperty<Avalonia.Media.Brush> TintBrushProperty = AvaloniaProperty.Register<TintCheckBox, Avalonia.Media.Brush>(nameof(TintBrush));
 
@@ -13,7 +13,7 @@ public class TintCheckBox : Avalonia.Controls.CheckBox
         TintBrushProperty.Changed.AddClassHandler<TintCheckBox>((x, e) => x.OnTintBrushPropertyChanged(e));
     }
 
-    protected override Type StyleKeyOverride => typeof(CheckBox);
+    protected override Type StyleKeyOverride => typeof(AvaloniaCheckBox);
 
     public Avalonia.Media.Brush TintBrush
     {

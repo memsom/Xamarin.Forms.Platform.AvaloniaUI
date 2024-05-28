@@ -55,11 +55,11 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
         }
     }
 
-    VisualElement IVisualElementRenderer.Element => Element;
+    VisualElement? IVisualElementRenderer.Element => Element;
 
-    public Control ContainerElement => Control;
+    public Control? ContainerElement => Control;
 
-    public Control GetNativeElement() => Control;
+    public Control? GetNativeElement() => Control;
 
     event EventHandler<VisualElementChangedEventArgs> IVisualElementRenderer.ElementChanged
     {
@@ -184,7 +184,11 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
 
         if (AutoTrack && Tracker == null)
         {
-            Tracker = new VisualElementTracker<TElement, Control> { Element = Element, Control = Control };
+            Tracker = new VisualElementTracker<TElement, Control>
+            {
+                Element = Element,
+                Control = Control,
+            };
         }
 
         Element.IsNativeStateConsistent = false;

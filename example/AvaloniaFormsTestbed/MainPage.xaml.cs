@@ -14,6 +14,6 @@ public partial class MainPage : ContentPage
     private void Button_OnClicked(object? sender, EventArgs e)
     {
         System.Diagnostics.Debug.WriteLine("hello, world");
-        Label1.Text = "Hello, world";
+        //Label1.Text = "Hello, world";
     }
 }
