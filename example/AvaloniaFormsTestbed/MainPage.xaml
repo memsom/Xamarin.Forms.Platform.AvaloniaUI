@@ -6,9 +6,14 @@
     x:Class="AvaloniaFormsTestbed.MainPage"
     BackgroundColor="White">
     <ContentPage.Content>
-        <StackLayout Orientation="Vertical" HorizontalOptions="FillAndExpand" VerticalOptions="FillAndExpand" BackgroundColor="Orange">
-            <Button Text="something" Clicked="Button_OnClicked" BackgroundColor="Purple"/>
-            <Label x:Name="Label1" Text="test" BackgroundColor="Red" />
+        <StackLayout>
+            <BoxView BackgroundColor="Red" />
+            <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
+                <Button Text="something" Clicked="Button_OnClicked" />
+                <Label x:Name="Label1" Text="test" />
+                <!-- <CheckBox IsChecked="True" BackgroundColor="Green" HorizontalOptions="Center" VerticalOptions="Center" /> -->
+                <BoxView BackgroundColor="Red" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

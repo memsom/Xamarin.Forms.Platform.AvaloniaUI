@@ -12,10 +12,8 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
 {
-    bool _isDisposed;
+    bool isDisposed;
     static AvaloniaBrush _tintDefaultBrush = Color.Transparent.ToBrush();
-
-    public CheckBoxRenderer() { }
 
     protected override void OnElementChanged(ElementChangedEventArgs<CheckBox> e)
     {
@@ -73,8 +71,8 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
 
     protected override void Dispose(bool disposing)
     {
-        if (_isDisposed) return;
-        _isDisposed = true;
+        if (isDisposed) return;
+        isDisposed = true;
 
         if (disposing && Control != null)
         {

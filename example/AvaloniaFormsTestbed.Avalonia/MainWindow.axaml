@@ -9,13 +9,12 @@
     mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
     x:Class="AvaloniaFormsTestbed.Avalonia.MainWindow"
     x:DataType="local:MainWindow"
-    Background="Blue"
     Title="AvaloniaFormsTestbed.Avalonia">
     <af:DynamicContentControl
         Name="PART_ContentControl"
         ContentLoader="{Binding ContentLoader}"
         Source="{Binding StartupPage}"
         IsVisible="{Binding !HasModalPage}"
-        Width="500"
-        Height="500"/>
+        HorizontalAlignment="Stretch"
+        VerticalAlignment="Stretch"/>
 </avaloniaForms:FormsApplicationPage>

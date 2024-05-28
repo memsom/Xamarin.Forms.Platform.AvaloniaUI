@@ -4,7 +4,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Controls;
 
-public class FormsContentPage : DynamicContentPage, IStyleable
+public class FormsContentPage : DynamicContentPage
 {
-    Type IStyleable.StyleKey => typeof(ContentControl);
+    protected override Type StyleKeyOverride => typeof(ContentControl);
 }
