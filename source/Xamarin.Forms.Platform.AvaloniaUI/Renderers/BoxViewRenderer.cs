@@ -58,7 +58,7 @@ public class BoxViewRenderer : ViewRenderer<BoxView, Border>
     protected override void UpdateBackground()
     {
         Color color = Element.Color != Color.Default ? Element.Color : Element.BackgroundColor;
-        Control.Background = color.ToBrush();
+        Control.Background = color.ToNativeBrush();
         Control.InvalidateMeasure();
     }
 

@@ -13,7 +13,7 @@ public static class ControlExtensions
         switch (newColor.IsDefault)
         {
             case false:
-                instance.SetValue(property, newColor.ToBrush());
+                instance.SetValue(property, newColor.ToNativeBrush());
                 break;
             default:
                 instance.ClearValue(property);

@@ -21,7 +21,7 @@ public sealed class FontImageSourceHandler : IImageSourceHandler
             FontStyle.Normal,
             FontWeight.Normal,
             fontsource.Size,
-            (fontsource.Color != Color.Default ? fontsource.Color : Color.White).ToBrush());
+            (fontsource.Color != Color.Default ? fontsource.Color : Color.White).ToNativeBrush());
         return Task.FromResult(image);
     }
 

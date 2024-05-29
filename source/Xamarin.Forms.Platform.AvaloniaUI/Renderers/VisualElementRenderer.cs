@@ -416,7 +416,7 @@ public class VisualElementRenderer<TElement, TNativeElement> : Panel, IVisualNat
         {
             if (!backgroundColor.IsDefault)
             {
-                backgroundLayer.Background = backgroundColor.ToBrush();
+                backgroundLayer.Background = backgroundColor.ToNativeBrush();
             }
             else
             {

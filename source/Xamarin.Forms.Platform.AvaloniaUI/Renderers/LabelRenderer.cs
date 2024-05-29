@@ -124,7 +124,7 @@ public class LabelRenderer : ViewRenderer<Label, TextBlock>
 			return;
 
 		if (Element.TextColor != Color.Default)
-			Control.Foreground = Element.TextColor.ToBrush();
+			Control.Foreground = Element.TextColor.ToNativeBrush();
 		else
 			Control.Foreground = Brushes.Black;
 	}

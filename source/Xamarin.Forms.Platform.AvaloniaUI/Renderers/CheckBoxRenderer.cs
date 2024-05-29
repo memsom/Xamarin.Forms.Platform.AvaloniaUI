@@ -1,4 +1,5 @@
 using System.ComponentModel;
+using Avalonia.Interactivity;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Controls;
@@ -13,7 +14,10 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
 {
     bool isDisposed;
-    static AvaloniaBrush _tintDefaultBrush = Color.Transparent.ToBrush();
+
+    static AvaloniaBrush _tintDefaultBrush = Color
+        .Transparent
+        .ToNativeBrush();
 
     protected override void OnElementChanged(ElementChangedEventArgs<CheckBox> e)
     {
@@ -23,12 +27,10 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
             {
                 SetNativeControl(new FormsCheckBox()
                 {
-                    // TODO:
                     //Style = (System.Windows.Style)System.Windows.Application.Current.MainWindow.FindResource("FormsCheckBoxStyle")
                 });
 
-                Control.Checked += OnNativeChecked;
-                Control.Unchecked += OnNativeChecked;
+                Control!.IsCheckedChanged += OnNativeChecked;
             }
 
             // Update control property
@@ -61,7 +63,7 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
         }
         else
         {
-            Control.TintBrush = Element.Color.ToBrush();
+            Control.TintBrush = Element.Color.ToNativeBrush();
         }
     }
 

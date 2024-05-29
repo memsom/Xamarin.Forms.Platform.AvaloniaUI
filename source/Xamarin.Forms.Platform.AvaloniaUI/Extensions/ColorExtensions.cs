@@ -17,12 +17,12 @@ public static class ColorExtensions
         return contrastingColor;
     }
 
-    public static AvaloniaBrush ToBrush(this FormsColor color) => new AvaloniaSolidColorBrush(color.ToNativeColor());
+    public static AvaloniaBrush ToNativeBrush(this FormsColor color) => new AvaloniaSolidColorBrush(color.ToNativeColor());
 
     public static AvaloniaColor ToNativeColor(this FormsColor color) =>
         AvaloniaColor.FromArgb((byte)(color.A * 255), (byte)(color.R * 255), (byte)(color.G * 255), (byte)(color.B * 255));
 
-    public static FormsColor ToFormsColor(this AvaloniaColor color) => Color.FromRgba(color.R, color.G, color.B, color.A);
+    public static FormsColor ToFormsColor(this AvaloniaColor color) => FormsColor.FromRgba(color.R, color.G, color.B, color.A);
 
     public static FormsColor ToFormsColor(this AvaloniaSolidColorBrush solidColorBrush) => solidColorBrush.Color.ToFormsColor();
 }
