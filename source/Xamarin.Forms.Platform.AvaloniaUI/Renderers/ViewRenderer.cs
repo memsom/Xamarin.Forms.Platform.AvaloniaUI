@@ -286,7 +286,7 @@ public class ViewRenderer<TElement, TNativeElement> : IVisualElementRenderer, IE
         }
     }
 
-    private void UnfocusControl(Control? control)
+    protected void UnfocusControl(Control? control)
     {
         if (control is not {IsEnabled: true})
             return;

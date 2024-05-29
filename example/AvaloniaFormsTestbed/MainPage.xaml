@@ -9,6 +9,10 @@
         <StackLayout>
             <BoxView BackgroundColor="Brown" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10"/>
             <CheckBox />
+            <Switch />
+            <DatePicker />
+            <Entry Placeholder="Hello"/>
+            <Editor HeightRequest="100" />
             <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
                 <Button Text="something" Clicked="Button_OnClicked" />
                 <Label x:Name="Label1" Text="test" />

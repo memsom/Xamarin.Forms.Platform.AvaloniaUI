@@ -1,5 +1,4 @@
 using System.ComponentModel;
-using Avalonia.Interactivity;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Controls;
@@ -15,7 +14,7 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
 {
     bool isDisposed;
 
-    static AvaloniaBrush _tintDefaultBrush = Color
+    static AvaloniaBrush tintDefaultBrush = Color
         .Transparent
         .ToNativeBrush();
 
@@ -59,7 +58,7 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
     {
         if (Element.Color == Color.Default)
         {
-            Control.TintBrush = _tintDefaultBrush;
+            Control.TintBrush = tintDefaultBrush;
         }
         else
         {
@@ -78,8 +77,7 @@ public class CheckBoxRenderer : ViewRenderer<CheckBox, FormsCheckBox>
 
         if (disposing && Control != null)
         {
-            Control.Checked -= OnNativeChecked;
-            Control.Unchecked -= OnNativeChecked;
+            Control.IsCheckedChanged -= OnNativeChecked;
         }
 
         base.Dispose(disposing);
