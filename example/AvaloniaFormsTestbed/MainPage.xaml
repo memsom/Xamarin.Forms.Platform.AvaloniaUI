@@ -7,7 +7,7 @@
     BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout>
-            <BoxView BackgroundColor="Brown" WidthRequest="20" HeightRequest="20" />
+            <BoxView BackgroundColor="Brown" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10"/>
             <CheckBox />
             <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
                 <Button Text="something" Clicked="Button_OnClicked" />
