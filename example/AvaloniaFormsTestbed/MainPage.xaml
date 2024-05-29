@@ -13,6 +13,14 @@
             <DatePicker />
             <Entry Placeholder="Hello"/>
             <Editor HeightRequest="100" />
+            <Picker>
+                <Picker.Items>
+                    <x:String>Test1</x:String>
+                    <x:String>Test2</x:String>
+                    <x:String>Test3</x:String>
+                </Picker.Items>
+            </Picker>
+            <Slider Minimum="0" Maximum="200" />
             <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
                 <Button Text="something" Clicked="Button_OnClicked" />
                 <Label x:Name="Label1" Text="test" />
