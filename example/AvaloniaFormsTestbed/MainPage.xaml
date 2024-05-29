@@ -9,10 +9,10 @@
         <StackLayout>
             <BoxView BackgroundColor="Brown" WidthRequest="20" HeightRequest="20" />
             <CheckBox />
-            <!-- <StackLayout Orientation="Vertical" BackgroundColor="Yellow"> -->
-            <!--     <Button Text="something" Clicked="Button_OnClicked" /> -->
-            <!--     <Label x:Name="Label1" Text="test" /> -->
-            <!-- </StackLayout> -->
+            <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
+                <Button Text="something" Clicked="Button_OnClicked" />
+                <Label x:Name="Label1" Text="test" />
+            </StackLayout>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

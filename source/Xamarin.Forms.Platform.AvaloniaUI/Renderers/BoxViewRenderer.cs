@@ -11,26 +11,18 @@ using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
-public class BoxViewRenderer : ViewRenderer<BoxView, FormsRectangle>
+public class BoxViewRenderer : ViewRenderer<BoxView, Border>
 {
-    Border? border;
-
     protected override void OnElementChanged(ElementChangedEventArgs<BoxView> e)
     {
         if (e.NewElement != null)
         {
             if (Control == null) // Construct and SetNativeControl and suscribe control event
             {
-                var rectangle = new FormsRectangle();
-
-                border = new Border();
-
-                VisualBrush visualBrush = new VisualBrush
+                var rectangle = new Border
                 {
-                    Visual = border
+                    Background = Brushes.Transparent
                 };
-
-                rectangle.Fill = visualBrush;
 
                 SetNativeControl(rectangle);
             }
@@ -66,19 +58,19 @@ public class BoxViewRenderer : ViewRenderer<BoxView, FormsRectangle>
     protected override void UpdateBackground()
     {
         Color color = Element.Color != Color.Default ? Element.Color : Element.BackgroundColor;
-        border.UpdateDependencyColor(Border.BackgroundProperty, color);
+        Control.Background = color.ToBrush();
         Control.InvalidateMeasure();
     }
 
     void UpdateCornerRadius()
     {
         var cornerRadius = Element.CornerRadius;
-        border.CornerRadius = new Avalonia.CornerRadius(cornerRadius.TopLeft, cornerRadius.TopRight, cornerRadius.BottomRight, cornerRadius.BottomLeft);
+        Control.CornerRadius = new Avalonia.CornerRadius(cornerRadius.TopLeft, cornerRadius.TopRight, cornerRadius.BottomRight, cornerRadius.BottomLeft);
     }
 
     void UpdateSize()
     {
-        border.Height = Element.Height > 0 ? Element.Height : Double.NaN;
-        border.Width = Element.Width > 0 ? Element.Width : Double.NaN;
+        Control.Height = Element.Height > 0 ? Element.Height : Double.NaN;
+        Control.Width = Element.Width > 0 ? Element.Width : Double.NaN;
     }
 }
