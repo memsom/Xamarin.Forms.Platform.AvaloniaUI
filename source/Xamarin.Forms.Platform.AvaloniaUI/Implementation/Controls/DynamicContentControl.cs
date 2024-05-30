@@ -1,11 +1,10 @@
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Interactivity;
-using Avalonia.Styling;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class DynamicContentControl : ContentControl, IStyleable
+public class DynamicContentControl : ContentControl
 {
     public static readonly StyledProperty<object> SourceProperty = AvaloniaProperty.Register<DynamicContentControl, object>(nameof(Source));
     public static readonly StyledProperty<IContentLoader> ContentLoaderProperty = AvaloniaProperty.Register<DynamicContentControl, IContentLoader>(nameof(ContentLoader), new DefaultContentLoader());
@@ -16,7 +15,7 @@ public class DynamicContentControl : ContentControl, IStyleable
         ContentLoaderProperty.Changed.AddClassHandler<DynamicContentControl>((x, e) => x.OnContentLoaderPropertyChanged(e));
     }
 
-    Type IStyleable.StyleKey => typeof(ContentControl);
+    protected override Type StyleKeyOverride => typeof(ContentControl);
 
     private CancellationTokenSource tokenSource;
 

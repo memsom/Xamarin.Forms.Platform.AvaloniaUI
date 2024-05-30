@@ -1,0 +1,22 @@
+<controls:AvaloniaListView
+    xmlns="https://github.com/avaloniaui"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+    xmlns:controls="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls"
+    xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters"
+    x:Class="Xamarin.Forms.Platform.AvaloniaUI.Controls.FormsListView"
+    ItemTemplate="{StaticResource CellTemplate}">
+    <controls:AvaloniaListView.Resources>
+        <converters:HeightConverter x:Key="HeightConverter" />
+
+        <DataTemplate x:Key="CellTemplate">
+            <controls:CellControl
+                Cell="{Binding}"
+                Margin="5,0,0,0"
+                Height="{Binding Cell.RenderHeight,RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HeightConverter}}">
+            </controls:CellControl>
+        </DataTemplate>
+    </controls:AvaloniaListView.Resources>
+</controls:AvaloniaListView>

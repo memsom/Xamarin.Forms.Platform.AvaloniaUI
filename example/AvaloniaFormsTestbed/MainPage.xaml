@@ -38,6 +38,7 @@
                     <Label x:Name="Label5" Text="test" />
                 </StackLayout>
             </ScrollView>
+            <ListView ItemsSource="{Binding Items}" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
