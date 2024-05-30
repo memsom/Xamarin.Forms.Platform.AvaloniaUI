@@ -7,12 +7,17 @@
     BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout>
-            <BoxView BackgroundColor="Brown" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10"/>
+            <ActivityIndicator IsRunning="True" />
+            <BoxView BackgroundColor="Brown" WidthRequest="50" HeightRequest="50" HorizontalOptions="Center" VerticalOptions="Center" CornerRadius="10" />
             <CheckBox />
             <Switch />
             <DatePicker />
-            <Entry Placeholder="Hello"/>
-            <Editor HeightRequest="100" />
+            <Frame BackgroundColor="AliceBlue"  BorderColor="Black" Padding="3" CornerRadius="5">
+                <StackLayout>
+                    <Entry Placeholder="Hello" />
+                    <Editor HeightRequest="100" />
+                </StackLayout>
+            </Frame>
             <Picker>
                 <Picker.Items>
                     <x:String>Test1</x:String>
@@ -20,12 +25,19 @@
                     <x:String>Test3</x:String>
                 </Picker.Items>
             </Picker>
+            <ProgressBar Progress="90" ProgressColor="Green" />
             <Slider Minimum="0" Maximum="200" />
-            <Stepper Minimum="1" Maximum="10"/>
-            <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
-                <Button Text="something" Clicked="Button_OnClicked" />
-                <Label x:Name="Label1" Text="test" />
-            </StackLayout>
+            <Stepper Minimum="1" Maximum="10" />
+            <ScrollView BackgroundColor="Yellow" HorizontalScrollBarVisibility="Always" HeightRequest="100">
+                <StackLayout HorizontalOptions="Fill">
+                    <Button Text="something" Clicked="Button_OnClicked" />
+                    <Label x:Name="Label1" Text="test" />
+                    <Label x:Name="Label2" Text="test" />
+                    <Label x:Name="Label3" Text="test" />
+                    <Label x:Name="Label4" Text="test" />
+                    <Label x:Name="Label5" Text="test" />
+                </StackLayout>
+            </ScrollView>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
