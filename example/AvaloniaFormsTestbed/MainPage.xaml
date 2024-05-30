@@ -21,6 +21,7 @@
                 </Picker.Items>
             </Picker>
             <Slider Minimum="0" Maximum="200" />
+            <Stepper Minimum="1" Maximum="10"/>
             <StackLayout Orientation="Vertical" BackgroundColor="Yellow">
                 <Button Text="something" Clicked="Button_OnClicked" />
                 <Label x:Name="Label1" Text="test" />
