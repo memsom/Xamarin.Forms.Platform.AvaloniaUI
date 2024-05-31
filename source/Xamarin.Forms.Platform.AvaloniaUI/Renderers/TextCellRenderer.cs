@@ -1,4 +1,9 @@
+using Xamarin.Forms;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.Platform.AvaloniaUI;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
+
+[assembly: ExportCell(typeof(Cell), typeof(TextCellRenderer))]
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 

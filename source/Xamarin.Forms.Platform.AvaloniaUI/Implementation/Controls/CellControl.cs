@@ -3,6 +3,7 @@ using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Styling;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 

@@ -7,5 +7,7 @@
 
     <Application.Styles>
         <FluentTheme />
+
+        <StyleInclude Source="avares://Xamarin.Forms.Platform.AvaloniaUI/XFAvaloniaUI.axaml"/>
     </Application.Styles>
 </Application>

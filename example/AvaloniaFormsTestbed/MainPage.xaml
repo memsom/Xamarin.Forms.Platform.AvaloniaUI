@@ -3,7 +3,9 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:local="clr-namespace:AvaloniaFormsTestbed"
     x:Class="AvaloniaFormsTestbed.MainPage"
+    x:DataType="local:MainPage"
     BackgroundColor="White">
     <ContentPage.Content>
         <StackLayout>

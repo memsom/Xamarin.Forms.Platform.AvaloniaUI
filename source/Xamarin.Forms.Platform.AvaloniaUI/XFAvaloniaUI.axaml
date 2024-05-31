@@ -1,9 +1,119 @@
 <Styles xmlns="https://github.com/avaloniaui"
-        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:controls="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls"
+        xmlns:controls1="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Controls"
+        xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters">
     <Design.PreviewWith>
         <Border Padding="20">
             <!-- Add Controls for Previewer Here -->
         </Border>
     </Design.PreviewWith>
 
+    <Styles.Resources>
+        <converters:HeightConverter x:Key="HeightConverter" />
+        <converters:ViewToRendererConverter x:Key="ViewToRenderer" />
+        <converters:ColorConverter x:Key="ColorConverter" />
+        <converters:ColorMultiValueConverter x:Key="ColorMultiValueConverter" />
+        <converters:ImageConverter x:Key="ImageConverter" />
+
+        <DataTemplate x:Key="CellTemplate">
+            <controls:CellControl
+                Cell="{Binding}" Margin="5,0,0,0"
+                Height="{Binding Cell.RenderHeight,RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HeightConverter}}">
+            </controls:CellControl>
+        </DataTemplate>
+
+        <DataTemplate x:Key="TextCell">
+            <StackPanel>
+                <TextBlock Text="{Binding Text}" FontSize="{StaticResource FontSizeNormal}">
+                    <TextBlock.Foreground>
+                        <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <Binding Path="TextColor" />
+                        </MultiBinding>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
+                <TextBlock Text="{Binding Detail}" FontSize="{StaticResource FontSizeExtraExtraSmall}">
+                    <TextBlock.Foreground>
+                        <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <Binding Path="DetailColor" />
+                        </MultiBinding>
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </StackPanel>
+        </DataTemplate>
+
+        <DataTemplate x:Key="SwitchCell">
+            <Grid HorizontalAlignment="Stretch">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <TextBlock Grid.Column="0" Text="{Binding Text}" VerticalAlignment="Center" />
+                <CheckBox Grid.Column="1" IsChecked="{Binding On, Mode=TwoWay}" VerticalAlignment="Center" />
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="ImageCell">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <Grid.RowDefinitions>
+                    <RowDefinition />
+                    <RowDefinition />
+                </Grid.RowDefinitions>
+
+                <Image
+                    Grid.Column="0" Grid.RowSpan="2"
+                    DataContext="{Binding ImageSource, Converter={StaticResource ImageConverter}}" Source="{Binding Value}"
+                    VerticalAlignment="Center" />
+
+                <TextBlock
+                    Grid.Column="1" Grid.Row="0"
+                    Text="{Binding Text}"
+                    IsVisible="{Binding Text, Converter={StaticResource CollapseWhenEmpty}}">
+                    <TextBlock.Foreground>
+                        <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <Binding Path="TextColor" />
+                        </MultiBinding>
+                    </TextBlock.Foreground>
+                </TextBlock>
+
+                <TextBlock
+                    Grid.Column="1" Grid.Row="1"
+                    Text="{Binding Detail}"
+                    IsVisible="{Binding Text, Converter={StaticResource CollapseWhenEmpty}}">
+                    <TextBlock.Foreground>
+                        <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                            <Binding RelativeSource="{RelativeSource Self}" />
+                            <Binding Path="DetailColor" />
+                        </MultiBinding>
+                    </TextBlock.Foreground>
+                </TextBlock>
+            </Grid>
+        </DataTemplate>
+
+        <DataTemplate x:Key="EntryCell">
+            <controls1:FormsTextBox Grid.Column="1" Text="{Binding Text, Mode=TwoWay}" VerticalAlignment="Center" IsEnabled="{Binding IsEnabled}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="ViewCell">
+            <ContentPresenter Content="{Binding View, Converter={StaticResource ViewToRenderer}}" />
+        </DataTemplate>
+
+        <DataTemplate x:Key="TitleDefaultTemplate">
+            <TextBlock
+                DataContext="{Binding}"
+                Text="{Binding}"
+                FontFamily="Segoe UI"
+                FontSize="26"
+                Foreground="Black" />
+        </DataTemplate>
+    </Styles.Resources>
 </Styles>

@@ -16,22 +16,22 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class ListViewRenderer : ViewRenderer<ListView, FormsListView>
 {
-    class ScrollViewerBehavior
-    {
-        //public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.RegisterAttached("VerticalOffset", typeof(double),
-        //	typeof(ScrollViewerBehavior), new UIPropertyMetadata(0.0, OnVerticalOffsetChanged));
+    // class ScrollViewerBehavior
+    // {
+    //     //public static readonly DependencyProperty VerticalOffsetProperty = DependencyProperty.RegisterAttached("VerticalOffset", typeof(double),
+    //     //	typeof(ScrollViewerBehavior), new UIPropertyMetadata(0.0, OnVerticalOffsetChanged));
+    //
+    //     //static void OnVerticalOffsetChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
+    //     //{
+    //     //	var scrollViewer = target as ScrollViewer;
+    //     //	scrollViewer?.ScrollToVerticalOffset((double)e.NewValue);
+    //     //}
+    // }
 
-        //static void OnVerticalOffsetChanged(DependencyObject target, DependencyPropertyChangedEventArgs e)
-        //{
-        //	var scrollViewer = target as ScrollViewer;
-        //	scrollViewer?.ScrollToVerticalOffset((double)e.NewValue);
-        //}
-    }
-
-    ITemplatedItemsView<Cell> TemplatedItemsView => Element;
+    ITemplatedItemsView<Cell>? TemplatedItemsView => Element;
     global::Avalonia.Controls.Primitives.ScrollBarVisibility? defaultHorizontalScrollVisibility;
     global::Avalonia.Controls.Primitives.ScrollBarVisibility? defaultVerticalScrollVisibility;
-    ScrollViewer scrollViewer;
+    ScrollViewer? scrollViewer;
 
     public override SizeRequest GetDesiredSize(double widthConstraint, double heightConstraint)
     {
@@ -219,9 +219,9 @@ public class ListViewRenderer : ViewRenderer<ListView, FormsListView>
         }
     }
 
-    void OnNativeKeyUp(object sender, KeyEventArgs e) => Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
+    void OnNativeKeyUp(object? sender, KeyEventArgs e) => Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
 
-    void OnNativeMouseUp(object sender, PointerReleasedEventArgs e) => Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
+    void OnNativeMouseUp(object? sender, PointerReleasedEventArgs e) => Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
 
     //void OnNativeTouchUp(object sender, TouchEventArgs e)
     //	=> Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
@@ -229,11 +229,11 @@ public class ListViewRenderer : ViewRenderer<ListView, FormsListView>
     //void OnNativeStylusUp(object sender, StylusEventArgs e)
     //	=> Element.NotifyRowTapped(Control.SelectedIndex, cell: null);
 
-    bool _isDisposed;
+    bool isDisposed;
 
     protected override void Dispose(bool disposing)
     {
-        if (_isDisposed)
+        if (isDisposed)
         {
             return;
         }
@@ -260,7 +260,7 @@ public class ListViewRenderer : ViewRenderer<ListView, FormsListView>
             }
         }
 
-        _isDisposed = true;
+        isDisposed = true;
         base.Dispose(disposing);
     }
 

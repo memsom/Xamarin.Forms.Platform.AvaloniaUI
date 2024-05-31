@@ -1,6 +1,9 @@
 using Avalonia.Controls;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 using IResourceDictionary = Xamarin.Forms.Internals.IResourceDictionary;
+
+[assembly: Xamarin.Forms.Dependency(typeof(AvaloniaResourcesProvider))]
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 
