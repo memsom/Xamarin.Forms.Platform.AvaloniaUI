@@ -2,12 +2,13 @@ using System.Globalization;
 using Avalonia;
 using Avalonia.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
+using Xamarin.Forms.Xaml;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
-public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.IMultiValueConverter
+public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.IMultiValueConverter, IMarkupExtension<global::Avalonia.Data.Converters.IMultiValueConverter>
 {
-    public object Convert(object[] values, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
         Control framework = values[0] as Control;
         AvaloniaProperty dp = parameter as AvaloniaProperty;
@@ -19,13 +20,14 @@ public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.
         return Color.Transparent.ToNativeBrush();
     }
 
-    public object Convert(IList<object> values, Type targetType, object parameter, CultureInfo culture)
-    {
-        return Convert(values.ToArray(), targetType, parameter, culture);
-    }
+    public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture) => Convert(values?.ToArray(), targetType, parameter, culture);
 
     public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
     {
         throw new NotImplementedException();
     }
+
+    public Avalonia.Data.Converters.IMultiValueConverter ProvideValue(IServiceProvider serviceProvider) => this;
+
+    object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider) => ProvideValue(serviceProvider);
 }

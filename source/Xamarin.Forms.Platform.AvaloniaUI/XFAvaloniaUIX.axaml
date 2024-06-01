@@ -1,0 +1,16 @@
+<Styles xmlns="https://github.com/avaloniaui"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:system="clr-namespace:System;assembly=mscorlib"
+        xmlns:af="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI"
+        xmlns:controls="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls"
+        xmlns:controls1="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Controls"
+        xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters"
+        xmlns:forms="http://xamarin.com/schemas/2014/forms">
+
+    <Styles.Resources>
+
+        <ResourceDictionary>
+
+        </ResourceDictionary>
+    </Styles.Resources>
+</Styles>

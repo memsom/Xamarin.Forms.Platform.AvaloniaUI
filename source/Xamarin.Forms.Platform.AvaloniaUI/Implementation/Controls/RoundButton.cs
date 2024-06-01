@@ -4,7 +4,7 @@ using Avalonia.Styling;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class RoundButton : Avalonia.Controls.Button, IStyleable
+public class RoundButton : Avalonia.Controls.Button
 {
     public static readonly StyledProperty<int> CornerRadiusProperty = AvaloniaProperty.Register<RoundButton, int>(nameof(CornerRadius));
 
@@ -13,26 +13,20 @@ public class RoundButton : Avalonia.Controls.Button, IStyleable
         CornerRadiusProperty.Changed.AddClassHandler<RoundButton>((x, e) => x.OnCornerRadiusPropertyChanged(e));
     }
 
-    Type IStyleable.StyleKey => typeof(Avalonia.Controls.Button);
+    protected override Type StyleKeyOverride => typeof(Avalonia.Controls.Button);
 
     public int CornerRadius
     {
-        get
-        {
-            return GetValue(CornerRadiusProperty);
-        }
-        set
-        {
-            SetValue(CornerRadiusProperty, value);
-        }
+        get => GetValue(CornerRadiusProperty);
+        set => SetValue(CornerRadiusProperty, value);
     }
 
-    Avalonia.Controls.Presenters.ContentPresenter _contentPresenter;
+    Avalonia.Controls.Presenters.ContentPresenter? contentPresenter;
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
-        _contentPresenter = VisualChildren.OfType<Avalonia.Controls.Presenters.ContentPresenter>().FirstOrDefault();
+        contentPresenter = VisualChildren.OfType<Avalonia.Controls.Presenters.ContentPresenter>().FirstOrDefault();
         UpdateCornerRadius();
     }
 
@@ -43,9 +37,9 @@ public class RoundButton : Avalonia.Controls.Button, IStyleable
 
     void UpdateCornerRadius()
     {
-        if (_contentPresenter != null)
+        if (contentPresenter != null)
         {
-            _contentPresenter.CornerRadius = new Avalonia.CornerRadius(CornerRadius);
+            contentPresenter.CornerRadius = new Avalonia.CornerRadius(CornerRadius);
         }
     }
 }

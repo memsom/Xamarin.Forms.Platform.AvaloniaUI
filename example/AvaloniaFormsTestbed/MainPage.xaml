@@ -40,7 +40,7 @@
                     <Label x:Name="Label5" Text="test" />
                 </StackLayout>
             </ScrollView>
-            <ListView ItemsSource="{Binding Items}" />
+            <ListView ItemsSource="{Binding Items}" HeightRequest="300" BackgroundColor="Green" />
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>
