@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 using AvaloniaApplication = Avalonia.Application;
 using AvaloniaDataTemplate = Avalonia.Markup.Xaml.Templates.DataTemplate;
+
 [assembly: ExportCell(typeof(Cell), typeof(TextCellRenderer))]
 [assembly: ExportCell(typeof(TextCell), typeof(TextCellRenderer))]
 
