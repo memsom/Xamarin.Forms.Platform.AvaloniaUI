@@ -7,5 +7,5 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Controls;
 
 public partial class FormsListView : AvaloniaListView
 {
-    public FormsListView() { InitializeComponent(); }
+    public FormsListView() => InitializeComponent();
 }

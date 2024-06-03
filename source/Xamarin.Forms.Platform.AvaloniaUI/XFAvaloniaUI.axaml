@@ -4,9 +4,7 @@
     xmlns:system="clr-namespace:System;assembly=mscorlib"
     xmlns:controls="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls"
     xmlns:controls1="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Controls"
-    xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters"
-    x:Class="Xamarin.Forms.Platform.AvaloniaUI.XFAvaloniaUI">
-
+    xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters">
 
     <!-- Default Global Color -->
     <SolidColorBrush x:Key="WindowBackgroundColor" Color="White" />
@@ -66,7 +64,7 @@
         <StackPanel>
             <TextBlock Text="{Binding Text}" FontSize="{StaticResource FontSizeNormal}">
                 <TextBlock.Foreground>
-                    <MultiBinding Converter="{converters:ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                    <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
                         <Binding RelativeSource="{RelativeSource Self}" />
                         <Binding Path="TextColor" />
                     </MultiBinding>
@@ -75,7 +73,7 @@
 
             <TextBlock Text="{Binding Detail}" FontSize="{StaticResource FontSizeExtraExtraSmall}">
                 <TextBlock.Foreground>
-                    <MultiBinding Converter="{converters:ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                    <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
                         <Binding RelativeSource="{RelativeSource Self}" />
                         <Binding Path="DetailColor" />
                     </MultiBinding>
@@ -117,7 +115,7 @@
                 Text="{Binding Text}"
                 IsVisible="{Binding Text, Converter={StaticResource CollapseWhenEmpty}}">
                 <TextBlock.Foreground>
-                    <MultiBinding Converter="{converters:ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                    <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
                         <Binding RelativeSource="{RelativeSource Self}" />
                         <Binding Path="TextColor" />
                     </MultiBinding>
@@ -129,7 +127,7 @@
                 Text="{Binding Detail}"
                 IsVisible="{Binding Text, Converter={StaticResource CollapseWhenEmpty}}">
                 <TextBlock.Foreground>
-                    <MultiBinding Converter="{converters:ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
+                    <MultiBinding Converter="{StaticResource ColorMultiValueConverter}" ConverterParameter="{x:Static TextBlock.ForegroundProperty}">
                         <Binding RelativeSource="{RelativeSource Self}" />
                         <Binding Path="DetailColor" />
                     </MultiBinding>

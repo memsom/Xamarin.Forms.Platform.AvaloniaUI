@@ -6,7 +6,7 @@ using Xamarin.Forms.Xaml;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
-public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.IMultiValueConverter, IMarkupExtension<global::Avalonia.Data.Converters.IMultiValueConverter>
+public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.IMultiValueConverter
 {
     public object? Convert(object[]? values, Type targetType, object? parameter, CultureInfo culture)
     {
@@ -22,12 +22,5 @@ public sealed class ColorMultiValueConverter : global::Avalonia.Data.Converters.
 
     public object? Convert(IList<object?> values, Type targetType, object? parameter, CultureInfo culture) => Convert(values?.ToArray(), targetType, parameter, culture);
 
-    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
-
-    public Avalonia.Data.Converters.IMultiValueConverter ProvideValue(IServiceProvider serviceProvider) => this;
-
-    object IMarkupExtension.ProvideValue(IServiceProvider serviceProvider) => ProvideValue(serviceProvider);
+    public object[] ConvertBack(object value, Type[] targetTypes, object parameter, CultureInfo culture) => throw new NotImplementedException();
 }
