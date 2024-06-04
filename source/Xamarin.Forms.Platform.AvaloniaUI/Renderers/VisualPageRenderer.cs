@@ -68,20 +68,11 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         }
     }
 
-    void UpdateBackButton()
-    {
-        Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
-    }
+    void UpdateBackButton() => Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
 
-    void UpdateBackButtonTitle()
-    {
-        Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
-    }
+    void UpdateBackButtonTitle() => Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
 
-    void UpdateNavigationBarVisible()
-    {
-        Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
-    }
+    void UpdateNavigationBarVisible() => Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
 
     protected override async void UpdateBackground()
     {
@@ -151,24 +142,21 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         UpdateToolbar();
     }
 
-    bool _isDisposed;
+    bool isDisposed;
 
     protected override void Dispose(bool disposing)
     {
-        if (_isDisposed)
+        if (isDisposed)
         {
             return;
         }
 
-        if (disposing)
+        if (disposing && Element != null)
         {
-            if (Element != null)
-            {
-                ((ObservableCollection<ToolbarItem>)Element.ToolbarItems).CollectionChanged -= VisualPageRenderer_CollectionChanged;
-            }
+            ((ObservableCollection<ToolbarItem>)Element.ToolbarItems).CollectionChanged -= VisualPageRenderer_CollectionChanged;
         }
 
-        _isDisposed = true;
+        isDisposed = true;
         base.Dispose(disposing);
     }
 }
