@@ -8,7 +8,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Dialogs;
 
-public class ContentDialog : ContentControl, IContentDialog, IStyleable
+public class ContentDialog : ContentControl, IContentDialog
 {
     public static readonly StyledProperty<object> TitleProperty = AvaloniaProperty.Register<ContentDialog, object>(nameof(Title));
     public static readonly StyledProperty<Avalonia.Markup.Xaml.Templates.DataTemplate> TitleTemplateProperty = AvaloniaProperty.Register<ContentDialog, Avalonia.Markup.Xaml.Templates.DataTemplate>(nameof(TitleTemplate));
@@ -26,7 +26,7 @@ public class ContentDialog : ContentControl, IContentDialog, IStyleable
     {
     }
 
-    Type IStyleable.StyleKey => typeof(ContentDialog);
+    protected override Type StyleKeyOverride => typeof(ContentDialog);
 
     TaskCompletionSource<ContentDialogResult> tcs;
 

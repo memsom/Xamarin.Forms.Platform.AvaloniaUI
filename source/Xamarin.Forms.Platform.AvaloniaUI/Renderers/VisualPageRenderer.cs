@@ -1,4 +1,5 @@
 using System.Collections.ObjectModel;
+using System.Collections.Specialized;
 using System.ComponentModel;
 using Avalonia.Media;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
@@ -8,7 +9,7 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElement, TNativeElement>
     where TElement : Page
-    where TNativeElement : DynamicContentPage
+    where TNativeElement : AvaloniaDynamicContentPage
 {
     protected override void OnElementChanged(ElementChangedEventArgs<TElement> e)
     {
@@ -33,42 +34,45 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         base.OnElementChanged(e);
     }
 
-    protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+    protected override void OnElementPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         base.OnElementPropertyChanged(sender, e);
 
         if (e.PropertyName == Page.BackgroundImageSourceProperty.PropertyName)
+        {
             UpdateBackground();
+        }
         else if (e.PropertyName == Page.TitleProperty.PropertyName)
+        {
             UpdateTitle();
+        }
         else if (e.PropertyName == NavigationPage.HasBackButtonProperty.PropertyName)
+        {
             UpdateBackButton();
+        }
         else if (e.PropertyName == NavigationPage.BackButtonTitleProperty.PropertyName)
+        {
             UpdateBackButtonTitle();
+        }
         else if (e.PropertyName == NavigationPage.HasNavigationBarProperty.PropertyName)
+        {
             UpdateNavigationBarVisible();
+        }
     }
 
     void UpdateTitle()
     {
         if (!string.IsNullOrWhiteSpace(Element.Title))
+        {
             Control.Title = Element.Title;
+        }
     }
 
-    void UpdateBackButton()
-    {
-        this.Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
-    }
+    void UpdateBackButton() => Control.HasBackButton = NavigationPage.GetHasBackButton(Element);
 
-    void UpdateBackButtonTitle()
-    {
-        this.Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
-    }
+    void UpdateBackButtonTitle() => Control.BackButtonTitle = NavigationPage.GetBackButtonTitle(Element);
 
-    void UpdateNavigationBarVisible()
-    {
-        this.Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
-    }
+    void UpdateNavigationBarVisible() => Control.HasNavigationBar = NavigationPage.GetHasNavigationBar(Element);
 
     protected override async void UpdateBackground()
     {
@@ -133,27 +137,26 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         base.Disappearing();
     }
 
-    private void VisualPageRenderer_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+    private void VisualPageRenderer_CollectionChanged(object sender, NotifyCollectionChangedEventArgs e)
     {
         UpdateToolbar();
     }
 
-    bool _isDisposed;
+    bool isDisposed;
 
     protected override void Dispose(bool disposing)
     {
-        if (_isDisposed)
-            return;
-
-        if (disposing)
+        if (isDisposed)
         {
-            if (Element != null)
-            {
-                ((ObservableCollection<ToolbarItem>)Element.ToolbarItems).CollectionChanged -= VisualPageRenderer_CollectionChanged;
-            }
+            return;
         }
 
-        _isDisposed = true;
+        if (disposing && Element != null)
+        {
+            ((ObservableCollection<ToolbarItem>)Element.ToolbarItems).CollectionChanged -= VisualPageRenderer_CollectionChanged;
+        }
+
+        isDisposed = true;
         base.Dispose(disposing);
     }
 }

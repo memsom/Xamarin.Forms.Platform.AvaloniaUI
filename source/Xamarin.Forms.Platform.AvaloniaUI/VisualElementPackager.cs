@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Avalonia.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI;
 

@@ -7,7 +7,7 @@ public class FormsPanel : Panel
 {
     IElementController ElementController => Element as IElementController;
 
-    public Layout Element { get; private set; }
+    public Layout? Element { get; private set; }
 
     public FormsPanel(Layout element)
     {

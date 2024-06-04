@@ -2,6 +2,9 @@ using System.Diagnostics;
 using System.IO.IsolatedStorage;
 using System.Runtime.Serialization;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
+
+[assembly: Xamarin.Forms.Dependency(typeof(AvaloniaSerializer))]
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 

@@ -8,6 +8,8 @@
 
     <ItemGroup>
         <PackageReference Include="Avalonia" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Controls.ItemsRepeater" Version="11.0.10" />
+        <PackageReference Include="ReactiveUI" Version="20.1.1" />
         <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662"/>
     </ItemGroup>
 

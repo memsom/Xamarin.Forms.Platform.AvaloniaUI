@@ -6,20 +6,24 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 
 public static class ControlExtensions
 {
-    public static object UpdateDependencyColor(this AvaloniaObject depo, AvaloniaProperty dp, Color newColor)
+    public static object? UpdateDependencyColor(this AvaloniaObject? instance, AvaloniaProperty property, Color newColor)
     {
-        if (!newColor.IsDefault)
-            depo.SetValue(dp, newColor.ToBrush());
-        else
-            depo.ClearValue(dp);
+        if (instance is null) return null;
 
-        return depo.GetValue(dp);
+        switch (newColor.IsDefault)
+        {
+            case false:
+                instance.SetValue(property, newColor.ToNativeBrush());
+                break;
+            default:
+                instance.ClearValue(property);
+                break;
+        }
+
+        return instance.GetValue(property);
     }
 
-    public static T? GetDefaultValue<T>(this StyledPropertyMetadata<T> propertyMetadata)
-    {
-        return default(T);
-    }
+    public static T? GetDefaultValue<T>(this StyledPropertyMetadata<T> propertyMetadata) => default;
 
     public static T? Find<T>(this Control control, string name, TemplateAppliedEventArgs? e = null) where T : Control
     {

@@ -10,7 +10,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
-public class ImageRenderer : ViewRenderer<Image, global::Avalonia.Controls.Image>
+public class ImageRenderer : ViewRenderer<Image, Avalonia.Controls.Image>
 {
     protected override async void OnElementChanged(ElementChangedEventArgs<Image> e)
     {
@@ -18,7 +18,7 @@ public class ImageRenderer : ViewRenderer<Image, global::Avalonia.Controls.Image
         {
             if (Control == null) // construct and SetNativeControl and suscribe control event
             {
-                SetNativeControl(new global::Avalonia.Controls.Image());
+                SetNativeControl(new Avalonia.Controls.Image());
             }
 
             // Update control property

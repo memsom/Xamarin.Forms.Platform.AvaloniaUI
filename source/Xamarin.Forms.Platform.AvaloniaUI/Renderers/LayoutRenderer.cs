@@ -2,9 +2,9 @@ using System.ComponentModel;
 using Avalonia.Controls;
 using Xamarin.Forms;
 using Xamarin.Forms.Platform.AvaloniaUI;
-using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 [assembly: ExportRenderer(typeof(Layout), typeof(LayoutRenderer))]
 
@@ -12,8 +12,8 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
 {
-    IElementController ElementController => Element as IElementController;
-    bool _isZChanged;
+    IElementController? ElementController => Element;
+    bool isZChanged;
 
     protected override void OnElementChanged(ElementChangedEventArgs<Layout> e)
     {
@@ -40,40 +40,25 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
         base.OnElementChanged(e);
     }
 
-    void HandleChildAdded(object sender, ElementEventArgs e)
+    void HandleChildAdded(object? sender, ElementEventArgs e)
     {
         UiHelper.ExecuteInUiThread(() =>
         {
             var view = e.Element as VisualElement;
 
-            if (view == null)
-                return;
-
-            IVisualElementRenderer renderer;
-            Platform.SetRenderer(view, renderer = Platform.CreateRenderer(view));
-            Control.Children.Add(renderer.GetNativeElement());
-            if (_isZChanged)
+            if (view == null || Control == null)
             {
-                EnsureZIndex();
+                return;
             }
-        });
-    }
 
-    void HandleChildRemoved(object sender, ElementEventArgs e)
-    {
-        UiHelper.ExecuteInUiThread(() =>
-        {
-            var view = e.Element as VisualElement;
-
-            if (view == null)
-                return;
-
-            Control native = Platform.GetRenderer(view)?.GetNativeElement() as Control;
-            if (native != null)
+            if (Platform.CreateRenderer(view) is { } renderer)
             {
-                Control.Children.Remove(native);
-                view.Cleanup();
-                if (_isZChanged)
+                Platform.SetRenderer(view, renderer);
+                if (renderer.GetNativeElement() is { } nativeElement)
+                {
+                    Control.Children.Add(nativeElement);
+                }
+                if (isZChanged)
                 {
                     EnsureZIndex();
                 }
@@ -81,7 +66,29 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
         });
     }
 
-    void HandleChildrenReordered(object sender, EventArgs e)
+    void HandleChildRemoved(object? sender, ElementEventArgs e)
+    {
+        UiHelper.ExecuteInUiThread(() =>
+        {
+            var view = e.Element as VisualElement;
+
+            if (view == null)
+                return;
+
+            Control native = Platform.GetRenderer(view)?.GetNativeElement();
+            if (native != null)
+            {
+                Control.Children.Remove(native);
+                view.Cleanup();
+                if (isZChanged)
+                {
+                    EnsureZIndex();
+                }
+            }
+        });
+    }
+
+    void HandleChildrenReordered(object? sender, EventArgs e)
     {
         EnsureZIndex();
     }
@@ -89,23 +96,31 @@ public class LayoutRenderer : ViewRenderer<Layout, FormsPanel>
     void EnsureZIndex()
     {
         if (ElementController.LogicalChildren.Count == 0)
+        {
             return;
+        }
 
         for (var z = 0; z < ElementController.LogicalChildren.Count; z++)
         {
             var child = ElementController.LogicalChildren[z] as VisualElement;
             if (child == null)
+            {
                 continue;
+            }
 
             IVisualElementRenderer childRenderer = Platform.GetRenderer(child);
 
             if (childRenderer == null)
+            {
                 continue;
+            }
 
             if (CanvasExtensions.GetZIndex(childRenderer.GetNativeElement()) != (z + 1))
             {
-                if (!_isZChanged)
-                    _isZChanged = true;
+                if (!isZChanged)
+                {
+                    isZChanged = true;
+                }
 
                 CanvasExtensions.SetZIndex(childRenderer.GetNativeElement(), z + 1);
             }

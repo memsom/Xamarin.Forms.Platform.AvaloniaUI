@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Dialogs;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI;
 
@@ -30,7 +31,6 @@ public abstract class Platform : BindableObject, INavigation
     internal Platform(ContentControl page)
     {
         pageInstance = page;
-
 
         var busyCount = 0;
         MessagingCenter.Subscribe(this, Page.BusySetSignalName, (Page sender, bool enabled) =>

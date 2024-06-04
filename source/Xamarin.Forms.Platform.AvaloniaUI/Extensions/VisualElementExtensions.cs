@@ -1,3 +1,5 @@
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
+
 namespace Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 
 public static class VisualElementExtensions

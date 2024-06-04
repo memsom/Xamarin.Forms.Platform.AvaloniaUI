@@ -4,9 +4,9 @@ using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.AvaloniaUI;
+using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
-using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Button = Xamarin.Forms.Button;
 
 [assembly: ExportRenderer(typeof(Button), typeof(ButtonRenderer))]
@@ -86,7 +86,7 @@ public class ButtonRenderer : ViewRenderer<Button, FormsButton>
 
     void UpdateBorderWidth()
     {
-        Control.BorderThickness = Element.BorderWidth <= 0d ? new global::Avalonia.Thickness(1) : new global::Avalonia.Thickness(Element.BorderWidth);
+        Control.BorderThickness = Element.BorderWidth <= 0d ? new Avalonia.Thickness(1) : new Avalonia.Thickness(Element.BorderWidth);
     }
 
     void UpdateCornerRadius()
@@ -107,7 +107,7 @@ public class ButtonRenderer : ViewRenderer<Button, FormsButton>
             return;
         }
 
-        var image = new global::Avalonia.Controls.Image
+        var image = new Avalonia.Controls.Image
         {
             Source = elementImage,
             Width = 30,
@@ -143,20 +143,20 @@ public class ButtonRenderer : ViewRenderer<Button, FormsButton>
         {
             case Button.ButtonContentLayout.ImagePosition.Top:
                 container.Orientation = Orientation.Vertical;
-                image.Margin = new global::Avalonia.Thickness(0, 0, 0, spacing);
+                image.Margin = new Avalonia.Thickness(0, 0, 0, spacing);
                 break;
             case Button.ButtonContentLayout.ImagePosition.Bottom:
                 container.Orientation = Orientation.Vertical;
-                image.Margin = new global::Avalonia.Thickness(0, spacing, 0, 0);
+                image.Margin = new Avalonia.Thickness(0, spacing, 0, 0);
                 break;
             case Button.ButtonContentLayout.ImagePosition.Right:
                 container.Orientation = Orientation.Horizontal;
-                image.Margin = new global::Avalonia.Thickness(spacing, 0, 0, 0);
+                image.Margin = new Avalonia.Thickness(spacing, 0, 0, 0);
                 break;
             default:
                 // Defaults to image on the left
                 container.Orientation = Orientation.Horizontal;
-                image.Margin = new global::Avalonia.Thickness(0, 0, spacing, 0);
+                image.Margin = new Avalonia.Thickness(0, 0, spacing, 0);
                 break;
         }
 
@@ -206,7 +206,7 @@ public class ButtonRenderer : ViewRenderer<Button, FormsButton>
 
     void UpdatePadding()
     {
-        Control.Padding = new global::Avalonia.Thickness(
+        Control.Padding = new Avalonia.Thickness(
             Element.Padding.Left,
             Element.Padding.Top,
             Element.Padding.Right,

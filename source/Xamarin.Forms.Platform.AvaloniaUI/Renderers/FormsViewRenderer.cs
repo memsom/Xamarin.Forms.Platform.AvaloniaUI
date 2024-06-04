@@ -1,4 +1,5 @@
 using Avalonia.Controls;
+using Avalonia.Controls.Primitives;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
@@ -42,9 +43,9 @@ public class FormsViewRenderer<TElement, TNativeElement> : VisualElementRenderer
 
     protected virtual void UpdateBackground()
     {
-        if (Control is global::Avalonia.Controls.Primitives.TemplatedControl templatedControl)
+        if (Control is TemplatedControl templatedControl)
         {
-            templatedControl?.UpdateDependencyColor(global::Avalonia.Controls.Primitives.TemplatedControl.BackgroundProperty, Element.BackgroundColor);
+            templatedControl?.UpdateDependencyColor(TemplatedControl.BackgroundProperty, Element.BackgroundColor);
         }
     }
 

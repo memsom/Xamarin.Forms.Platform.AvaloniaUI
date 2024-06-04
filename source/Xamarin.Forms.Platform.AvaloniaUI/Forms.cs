@@ -1,12 +1,11 @@
 using System.Reflection;
 using Xamarin.Forms.Internals;
-using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 using AvaloniaApplication = Avalonia.Application;
 using AvaloniaSolidColorBrush = Avalonia.Media.SolidColorBrush;
 
-namespace Xamarin.Forms;
+namespace Xamarin.Forms.Platform.AvaloniaUI;
 
 public static class Forms
 {
