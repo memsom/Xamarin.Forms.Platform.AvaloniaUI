@@ -1,6 +1,6 @@
 using Avalonia.Controls;
 
-namespace Xamarin.Forms.Platform.AvaloniaUI;
+namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public interface IVisualElementRenderer : IRegisterable, IDisposable
 {

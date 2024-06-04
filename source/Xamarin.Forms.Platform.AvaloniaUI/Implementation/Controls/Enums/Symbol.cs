@@ -1,4 +1,4 @@
-namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
+namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls.Enums;
 
 public enum Symbol
 {

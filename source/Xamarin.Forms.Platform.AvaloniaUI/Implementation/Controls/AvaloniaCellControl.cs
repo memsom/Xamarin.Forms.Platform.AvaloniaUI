@@ -1,24 +1,23 @@
 using System.ComponentModel;
 using Avalonia;
 using Avalonia.Controls;
-using Avalonia.Styling;
 using Xamarin.Forms.Internals;
 using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class CellControl : ContentControl
+public class AvaloniaCellControl : ContentControl
 {
-    public static readonly StyledProperty<object> CellProperty = AvaloniaProperty.Register<CellControl, object>(nameof(Cell));
-    public static readonly StyledProperty<bool> ShowContextActionsProperty = AvaloniaProperty.Register<CellControl, bool>(nameof(ShowContextActions), true);
+    public static readonly StyledProperty<object> CellProperty = AvaloniaProperty.Register<AvaloniaCellControl, object>(nameof(Cell));
+    public static readonly StyledProperty<bool> ShowContextActionsProperty = AvaloniaProperty.Register<AvaloniaCellControl, bool>(nameof(ShowContextActions), true);
 
     readonly PropertyChangedEventHandler? propertyChangedHandler;
 
     protected override Type StyleKeyOverride => typeof(ContentControl);
 
-    public CellControl()
+    public AvaloniaCellControl()
     {
-        CellProperty.Changed.AddClassHandler<CellControl>((x, e) => x.SetSource(e.OldValue, e.NewValue));
+        CellProperty.Changed.AddClassHandler<AvaloniaCellControl>((x, e) => x.SetSource(e.OldValue, e.NewValue));
 
         DetachedFromVisualTree += OnEventHandler;
 

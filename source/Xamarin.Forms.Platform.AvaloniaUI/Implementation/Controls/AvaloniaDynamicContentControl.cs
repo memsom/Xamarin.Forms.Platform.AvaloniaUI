@@ -4,15 +4,15 @@ using Avalonia.Interactivity;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class DynamicContentControl : ContentControl
+public class AvaloniaDynamicContentControl : ContentControl
 {
-    public static readonly StyledProperty<object> SourceProperty = AvaloniaProperty.Register<DynamicContentControl, object>(nameof(Source));
-    public static readonly StyledProperty<IContentLoader> ContentLoaderProperty = AvaloniaProperty.Register<DynamicContentControl, IContentLoader>(nameof(ContentLoader), new DefaultContentLoader());
+    public static readonly StyledProperty<object> SourceProperty = AvaloniaProperty.Register<AvaloniaDynamicContentControl, object>(nameof(Source));
+    public static readonly StyledProperty<IContentLoader> ContentLoaderProperty = AvaloniaProperty.Register<AvaloniaDynamicContentControl, IContentLoader>(nameof(ContentLoader), new DefaultContentLoader());
 
-    static DynamicContentControl()
+    static AvaloniaDynamicContentControl()
     {
-        SourceProperty.Changed.AddClassHandler<DynamicContentControl>((x, e) => x.OnSourcePropertyChanged(e));
-        ContentLoaderProperty.Changed.AddClassHandler<DynamicContentControl>((x, e) => x.OnContentLoaderPropertyChanged(e));
+        SourceProperty.Changed.AddClassHandler<AvaloniaDynamicContentControl>((x, e) => x.OnSourcePropertyChanged(e));
+        ContentLoaderProperty.Changed.AddClassHandler<AvaloniaDynamicContentControl>((x, e) => x.OnContentLoaderPropertyChanged(e));
     }
 
     protected override Type StyleKeyOverride => typeof(ContentControl);
@@ -31,7 +31,7 @@ public class DynamicContentControl : ContentControl
         set { SetValue(ContentLoaderProperty, value); }
     }
 
-    public DynamicContentControl() { LayoutUpdated += OnLayoutUpdated; }
+    public AvaloniaDynamicContentControl() { LayoutUpdated += OnLayoutUpdated; }
 
     #region Loaded & Unloaded
 

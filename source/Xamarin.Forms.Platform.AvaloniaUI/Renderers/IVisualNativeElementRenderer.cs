@@ -1,6 +1,6 @@
 using System.ComponentModel;
 
-namespace Xamarin.Forms.Platform.AvaloniaUI;
+namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public interface IVisualNativeElementRenderer : IVisualElementRenderer
 {

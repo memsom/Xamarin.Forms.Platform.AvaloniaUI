@@ -7,6 +7,8 @@ using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
+using AvaloniaApplication = Avalonia.Application;
+using AvaloniaDataTemplate = Avalonia.Markup.Xaml.Templates.DataTemplate;
 
 [assembly: ExportRenderer(typeof(ListView), typeof(ListViewRenderer))]
 
@@ -74,7 +76,7 @@ public class ListViewRenderer : ViewRenderer<ListView, FormsListView>
                 var listView = new FormsListView
                 {
                     DataContext = Element,
-                    //ItemTemplate = (global::Avalonia.Markup.Xaml.Templates.DataTemplate)global::Avalonia.Application.Current.Resources["CellTemplate"],
+                    ItemTemplate = AvaloniaApplication.Current!.FindResource("CellTemplate") as AvaloniaDataTemplate,
                     //Style = (System.Windows.Style)System.Windows.Application.Current.Resources["ListViewTemplate"]
                 };
 

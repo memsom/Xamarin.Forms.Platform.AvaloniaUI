@@ -4,13 +4,13 @@ using Avalonia.Styling;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class RoundButton : Avalonia.Controls.Button
+public class AvaloniaRoundButton : Avalonia.Controls.Button
 {
-    public static readonly StyledProperty<int> CornerRadiusProperty = AvaloniaProperty.Register<RoundButton, int>(nameof(CornerRadius));
+    public static readonly StyledProperty<int> CornerRadiusProperty = AvaloniaProperty.Register<AvaloniaRoundButton, int>(nameof(CornerRadius));
 
-    static RoundButton()
+    static AvaloniaRoundButton()
     {
-        CornerRadiusProperty.Changed.AddClassHandler<RoundButton>((x, e) => x.OnCornerRadiusPropertyChanged(e));
+        CornerRadiusProperty.Changed.AddClassHandler<AvaloniaRoundButton>((x, e) => x.OnCornerRadiusPropertyChanged(e));
     }
 
     protected override Type StyleKeyOverride => typeof(Avalonia.Controls.Button);

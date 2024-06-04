@@ -3,9 +3,9 @@ using Avalonia.Media;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class PathIcon : ElementIcon
+public class AvaloniaPathIcon : AvaloniaElementIcon
 {
-    public static readonly StyledProperty<Geometry> DataProperty = AvaloniaProperty.Register<PathIcon, Geometry>(nameof(Data));
+    public static readonly StyledProperty<Geometry> DataProperty = AvaloniaProperty.Register<AvaloniaPathIcon, Geometry>(nameof(Data));
 
     public Geometry Data
     {

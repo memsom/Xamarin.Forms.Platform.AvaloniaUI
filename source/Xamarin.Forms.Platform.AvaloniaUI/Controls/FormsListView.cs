@@ -5,7 +5,4 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Controls;
 
-public partial class FormsListView : AvaloniaListView
-{
-    public FormsListView() => InitializeComponent();
-}
+public class FormsListView : AvaloniaListView;

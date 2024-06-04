@@ -5,6 +5,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Dialogs;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation;
+using Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI;
 

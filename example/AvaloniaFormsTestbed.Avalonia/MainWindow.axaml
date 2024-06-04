@@ -10,7 +10,7 @@
     x:Class="AvaloniaFormsTestbed.Avalonia.MainWindow"
     x:DataType="local:MainWindow"
     Title="AvaloniaFormsTestbed.Avalonia">
-    <af:DynamicContentControl
+    <af:AvaloniaDynamicContentControl
         Name="PART_ContentControl"
         ContentLoader="{Binding ContentLoader}"
         Source="{Binding StartupPage}"

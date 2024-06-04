@@ -1,6 +1,7 @@
 using System.Globalization;
 using Avalonia.Media;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
+using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls.Enums;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
@@ -11,11 +12,11 @@ public class IconConveter : global::Avalonia.Data.Converters.IValueConverter
         if (value is FileImageSource imageSource)
         {
             if (Enum.TryParse(imageSource.File, true, out Symbol symbol))
-                return new SymbolIcon() { Symbol = symbol };
+                return new AvaloniaSymbolIcon() { Symbol = symbol };
             else if (TryParseGeometry(imageSource.File, out Geometry geometry))
-                return new PathIcon() { Data = geometry };
+                return new AvaloniaPathIcon() { Data = geometry };
             else if (Path.GetExtension(imageSource.File) != null)
-                return new BitmapIcon() { UriSource = new Uri(imageSource.File, UriKind.RelativeOrAbsolute) };
+                return new AvaloniaBitmapIcon() { UriSource = new Uri(imageSource.File, UriKind.RelativeOrAbsolute) };
         }
 
         return null;

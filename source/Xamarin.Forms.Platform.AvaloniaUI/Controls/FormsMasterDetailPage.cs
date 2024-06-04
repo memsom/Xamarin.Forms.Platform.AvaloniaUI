@@ -2,4 +2,4 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Controls;
 
-public class FormsCheckBox() : AvaloniaTintCheckBox;
+public class FormsMasterDetailPage : AvaloniaMasterDetailPage;

@@ -1,5 +1,6 @@
 using System.Globalization;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
+using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls.Enums;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 

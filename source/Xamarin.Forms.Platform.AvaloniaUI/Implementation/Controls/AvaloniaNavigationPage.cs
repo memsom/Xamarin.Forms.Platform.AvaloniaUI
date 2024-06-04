@@ -7,45 +7,38 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyleable
+public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INavigation
 {
-    public static readonly StyledProperty<object> CurrentPageProperty = AvaloniaProperty.Register<NavigationPage, object>(nameof(CurrentPage));
+    public static readonly StyledProperty<object> CurrentPageProperty = AvaloniaProperty.Register<AvaloniaNavigationPage, object>(nameof(CurrentPage));
 
-    static NavigationPage() { }
+    static AvaloniaNavigationPage() { }
 
-    Type IStyleable.StyleKey => typeof(NavigationPage);
+    protected override Type StyleKeyOverride => typeof(AvaloniaNavigationPage);
 
-    public TransitioningContentControl ContentControl { get; private set; }
+    public AvaloniaTransitioningContentControl? ContentControl { get; private set; }
 
-    public ObservableCollection<object> InternalChildren { get; } = new ObservableCollection<object>();
+    public ObservableCollection<object> InternalChildren { get; } = new();
 
     public object CurrentPage
     {
-        get { return GetValue(CurrentPageProperty); }
-        set { SetValue(CurrentPageProperty, value); }
+        get => GetValue(CurrentPageProperty);
+        set => SetValue(CurrentPageProperty, value);
     }
 
-    public NavigationPage() { }
+    public AvaloniaNavigationPage() { }
 
-    public NavigationPage(object root)
-        : this()
-    {
-        Push(root);
-    }
+    public AvaloniaNavigationPage(object root) : this() => Push(root);
 
     protected override void OnApplyTemplate(TemplateAppliedEventArgs e)
     {
         base.OnApplyTemplate(e);
 
-        ContentControl = e.NameScope.Find<TransitioningContentControl>("PART_Navigation_Content");
+        ContentControl = e.NameScope.Find<AvaloniaTransitioningContentControl>("PART_Navigation_Content");
     }
 
     #region INavigation
 
-    public int StackDepth
-    {
-        get { return InternalChildren.Count; }
-    }
+    public int StackDepth => InternalChildren.Count;
 
     public void InsertPageBefore(object page, object before)
     {
@@ -69,7 +62,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
         //ParentWindow?.SynchronizeAppBar();
     }
 
-    public void Pop() { Pop(true); }
+    public void Pop() => Pop(true);
 
     public void Pop(bool animated)
     {
@@ -86,7 +79,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
         }
     }
 
-    public void PopToRoot() { PopToRoot(true); }
+    public void PopToRoot() => PopToRoot(true);
 
     public void PopToRoot(bool animated)
     {
@@ -103,7 +96,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
         CurrentPage = InternalChildren.Last();
     }
 
-    public void Push(object page) { Push(page, true); }
+    public void Push(object page) => Push(page, true);
 
     public void Push(object page, bool animated)
     {
@@ -116,19 +109,19 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
         CurrentPage = page;
     }
 
-    public void PopModal() { PopModal(true); }
+    public void PopModal() => PopModal(true);
 
-    public void PopModal(bool animated) { ParentWindow?.PopModal(animated); }
+    public void PopModal(bool animated) => ParentWindow?.PopModal(animated);
 
-    public void PushModal(object page) { PushModal(page, true); }
+    public void PushModal(object page) => PushModal(page, true);
 
-    public void PushModal(object page, bool animated) { ParentWindow?.PushModal(page, animated); }
+    public void PushModal(object page, bool animated) => ParentWindow?.PushModal(page, animated);
 
     #endregion
 
     public override string GetTitle()
     {
-        if (ContentControl != null && ContentControl.Content is DynamicContentPage page)
+        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
         {
             return page.GetTitle();
         }
@@ -138,7 +131,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
 
     public override bool GetHasNavigationBar()
     {
-        if (ContentControl != null && ContentControl.Content is DynamicContentPage page)
+        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
         {
             return page.GetHasNavigationBar();
         }
@@ -156,7 +149,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
 
     public bool GetHasBackButton()
     {
-        if (ContentControl != null && ContentControl.Content is DynamicContentPage page)
+        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
         {
             return page.HasBackButton && StackDepth > 1;
         }
@@ -174,7 +167,7 @@ public class NavigationPage : DynamicContentPage, Navigation.INavigation, IStyle
         return "";
     }
 
-    public virtual void OnBackButtonPressed() { Pop(); }
+    public virtual void OnBackButtonPressed() => Pop();
 
-    protected override void OnLayoutUpdated(object sender, EventArgs e) { ContentLoader.OnSizeContentChanged(this, CurrentPage); }
+    protected override void OnLayoutUpdated(object? sender, EventArgs e) { ContentLoader.OnSizeContentChanged(this, CurrentPage); }
 }

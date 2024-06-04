@@ -3,13 +3,13 @@ using Avalonia;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class BitmapIcon : ElementIcon
+public class AvaloniaBitmapIcon : AvaloniaElementIcon
 {
-    public static readonly StyledProperty<Uri> UriSourceProperty = AvaloniaProperty.Register<BitmapIcon, Uri>(nameof(UriSource));
+    public static readonly StyledProperty<Uri> UriSourceProperty = AvaloniaProperty.Register<AvaloniaBitmapIcon, Uri>(nameof(UriSource));
 
-    static BitmapIcon()
+    static AvaloniaBitmapIcon()
     {
-        UriSourceProperty.Changed.AddClassHandler<BitmapIcon>((x, e) => x.OnUriSourcePropertyChanged(e));
+        UriSourceProperty.Changed.AddClassHandler<AvaloniaBitmapIcon>((x, e) => x.OnUriSourcePropertyChanged(e));
     }
 
     public Uri UriSource

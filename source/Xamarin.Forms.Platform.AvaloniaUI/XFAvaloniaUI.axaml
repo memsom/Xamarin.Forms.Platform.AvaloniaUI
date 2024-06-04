@@ -54,10 +54,10 @@
     <converters:ImageConverter x:Key="ImageConverter" />
 
     <DataTemplate x:Key="CellTemplate">
-        <controls:CellControl
+        <controls:AvaloniaCellControl
             Cell="{Binding}" Margin="5,0,0,0"
             Height="{Binding Cell.RenderHeight,RelativeSource={RelativeSource Mode=Self}, Converter={StaticResource HeightConverter}}">
-        </controls:CellControl>
+        </controls:AvaloniaCellControl>
     </DataTemplate>
 
     <DataTemplate x:Key="TextCell">

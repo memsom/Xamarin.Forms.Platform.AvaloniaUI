@@ -9,7 +9,7 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Renderers;
 
 public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElement, TNativeElement>
     where TElement : Page
-    where TNativeElement : DynamicContentPage
+    where TNativeElement : AvaloniaDynamicContentPage
 {
     protected override void OnElementChanged(ElementChangedEventArgs<TElement> e)
     {
@@ -34,26 +34,38 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
         base.OnElementChanged(e);
     }
 
-    protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+    protected override void OnElementPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         base.OnElementPropertyChanged(sender, e);
 
         if (e.PropertyName == Page.BackgroundImageSourceProperty.PropertyName)
+        {
             UpdateBackground();
+        }
         else if (e.PropertyName == Page.TitleProperty.PropertyName)
+        {
             UpdateTitle();
+        }
         else if (e.PropertyName == NavigationPage.HasBackButtonProperty.PropertyName)
+        {
             UpdateBackButton();
+        }
         else if (e.PropertyName == NavigationPage.BackButtonTitleProperty.PropertyName)
+        {
             UpdateBackButtonTitle();
+        }
         else if (e.PropertyName == NavigationPage.HasNavigationBarProperty.PropertyName)
+        {
             UpdateNavigationBarVisible();
+        }
     }
 
     void UpdateTitle()
     {
         if (!string.IsNullOrWhiteSpace(Element.Title))
+        {
             Control.Title = Element.Title;
+        }
     }
 
     void UpdateBackButton()
@@ -144,7 +156,9 @@ public class VisualPageRenderer<TElement, TNativeElement> : ViewRenderer<TElemen
     protected override void Dispose(bool disposing)
     {
         if (_isDisposed)
+        {
             return;
+        }
 
         if (disposing)
         {

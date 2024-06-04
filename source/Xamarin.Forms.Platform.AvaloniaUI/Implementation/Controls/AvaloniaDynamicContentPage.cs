@@ -8,25 +8,25 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class DynamicContentPage : UserControl
+public class AvaloniaDynamicContentPage : UserControl
 {
-    public static readonly StyledProperty<IContentLoader> ContentLoaderProperty = AvaloniaProperty.Register<DynamicContentPage, IContentLoader>(nameof(ContentLoader), new DefaultContentLoader());
+    public static readonly StyledProperty<IContentLoader> ContentLoaderProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, IContentLoader>(nameof(ContentLoader), new DefaultContentLoader());
 
-    public static readonly StyledProperty<string> TitleProperty = AvaloniaProperty.Register<DynamicContentPage, string>(nameof(Title));
-    public static readonly StyledProperty<string> BackButtonTitleProperty = AvaloniaProperty.Register<DynamicContentPage, string>(nameof(BackButtonTitle));
-    public static readonly StyledProperty<bool> HasNavigationBarProperty = AvaloniaProperty.Register<DynamicContentPage, bool>(nameof(HasNavigationBar), true);
-    public static readonly StyledProperty<bool> HasBackButtonProperty = AvaloniaProperty.Register<DynamicContentPage, bool>(nameof(HasBackButton), true);
+    public static readonly StyledProperty<string> TitleProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, string>(nameof(Title));
+    public static readonly StyledProperty<string> BackButtonTitleProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, string>(nameof(BackButtonTitle));
+    public static readonly StyledProperty<bool> HasNavigationBarProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, bool>(nameof(HasNavigationBar), true);
+    public static readonly StyledProperty<bool> HasBackButtonProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, bool>(nameof(HasBackButton), true);
 
-    public static readonly StyledProperty<ObservableCollection<Control>> PrimaryTopBarCommandsProperty = AvaloniaProperty.Register<DynamicContentPage, ObservableCollection<Control>>(nameof(PrimaryTopBarCommands));
-    public static readonly StyledProperty<ObservableCollection<Control>> SecondaryTopBarCommandsProperty = AvaloniaProperty.Register<DynamicContentPage, ObservableCollection<Control>>(nameof(SecondaryTopBarCommands));
-    public static readonly StyledProperty<ObservableCollection<Control>> PrimaryBottomBarCommandsProperty = AvaloniaProperty.Register<DynamicContentPage, ObservableCollection<Control>>(nameof(PrimaryBottomBarCommands));
-    public static readonly StyledProperty<ObservableCollection<Control>> SecondaryBottomBarCommandsProperty = AvaloniaProperty.Register<DynamicContentPage, ObservableCollection<Control>>(nameof(SecondaryBottomBarCommands));
-    public static readonly StyledProperty<ObservableCollection<Control>> ContentBottomBarProperty = AvaloniaProperty.Register<DynamicContentPage, ObservableCollection<Control>>(nameof(ContentBottomBar));
+    public static readonly StyledProperty<ObservableCollection<Control>> PrimaryTopBarCommandsProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, ObservableCollection<Control>>(nameof(PrimaryTopBarCommands));
+    public static readonly StyledProperty<ObservableCollection<Control>> SecondaryTopBarCommandsProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, ObservableCollection<Control>>(nameof(SecondaryTopBarCommands));
+    public static readonly StyledProperty<ObservableCollection<Control>> PrimaryBottomBarCommandsProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, ObservableCollection<Control>>(nameof(PrimaryBottomBarCommands));
+    public static readonly StyledProperty<ObservableCollection<Control>> SecondaryBottomBarCommandsProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, ObservableCollection<Control>>(nameof(SecondaryBottomBarCommands));
+    public static readonly StyledProperty<ObservableCollection<Control>> ContentBottomBarProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, ObservableCollection<Control>>(nameof(ContentBottomBar));
 
-    public static readonly StyledProperty<Avalonia.Media.Brush> TitleBarBackgroundColorProperty = AvaloniaProperty.Register<DynamicContentPage, Avalonia.Media.Brush>(nameof(TitleBarBackgroundColor));
-    public static readonly StyledProperty<Avalonia.Media.Brush> TitleBarTextColorProperty = AvaloniaProperty.Register<DynamicContentPage, Avalonia.Media.Brush>(nameof(TitleBarTextColor));
+    public static readonly StyledProperty<Avalonia.Media.Brush> TitleBarBackgroundColorProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, Avalonia.Media.Brush>(nameof(TitleBarBackgroundColor));
+    public static readonly StyledProperty<Avalonia.Media.Brush> TitleBarTextColorProperty = AvaloniaProperty.Register<AvaloniaDynamicContentPage, Avalonia.Media.Brush>(nameof(TitleBarTextColor));
 
-    static DynamicContentPage() { }
+    static AvaloniaDynamicContentPage() { }
 
     public IContentLoader ContentLoader
     {
@@ -104,14 +104,14 @@ public class DynamicContentPage : UserControl
     {
         get
         {
-            Navigation.INavigation nav = this.TryFindParent<NavigationPage>();
+            Navigation.INavigation nav = this.TryFindParent<AvaloniaNavigationPage>();
             return nav ?? new DefaultNavigation();
         }
     }
 
     public ApplicationWindow? ParentWindow => this.GetParentWindow() as ApplicationWindow;
 
-    public DynamicContentPage()
+    public AvaloniaDynamicContentPage()
     {
         SetValue(PrimaryTopBarCommandsProperty, new ObservableCollection<Control>());
         SetValue(SecondaryTopBarCommandsProperty, new ObservableCollection<Control>());
