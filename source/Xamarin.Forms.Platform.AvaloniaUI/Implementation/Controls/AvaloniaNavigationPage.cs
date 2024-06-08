@@ -2,12 +2,13 @@ using System.Collections.ObjectModel;
 using Avalonia;
 using Avalonia.Controls;
 using Avalonia.Controls.Primitives;
-using Avalonia.Styling;
+using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls.Enums;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
+using IAvaloniaNavigation = Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation.INavigation;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
-public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INavigation
+public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, IAvaloniaNavigation
 {
     public static readonly StyledProperty<object> CurrentPageProperty = AvaloniaProperty.Register<AvaloniaNavigationPage, object>(nameof(CurrentPage));
 
@@ -44,7 +45,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
     {
         int index = InternalChildren.IndexOf(before);
         InternalChildren.Insert(index, page);
-        //ParentWindow?.SynchronizeAppBar();
+        ParentWindow?.SynchronizeAppBar();
     }
 
     public void RemovePage(object page)
@@ -53,13 +54,13 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
         {
             if (ContentControl != null)
             {
-                //ContentControl.Transition = TransitionType.Normal;
+                ContentControl.Transition = TransitionType.Normal;
             }
 
             CurrentPage = InternalChildren.Last();
         }
 
-        //ParentWindow?.SynchronizeAppBar();
+        ParentWindow?.SynchronizeAppBar();
     }
 
     public void Pop() => Pop(true);
@@ -72,7 +73,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
         {
             if (ContentControl != null)
             {
-               // ContentControl.Transition = animated ? TransitionType.Right : TransitionType.Normal;
+                ContentControl.Transition = animated ? TransitionType.Right : TransitionType.Normal;
             }
 
             CurrentPage = InternalChildren.Last();
@@ -90,7 +91,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
 
         if (ContentControl != null)
         {
-            //ContentControl.Transition = animated ? TransitionType.Right : TransitionType.Normal;
+            ContentControl.Transition = animated ? TransitionType.Right : TransitionType.Normal;
         }
 
         CurrentPage = InternalChildren.Last();
@@ -103,7 +104,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
         InternalChildren.Add(page);
         if (ContentControl != null)
         {
-            //ContentControl.Transition = animated ? TransitionType.Left : TransitionType.Normal;
+            ContentControl.Transition = animated ? TransitionType.Left : TransitionType.Normal;
         }
 
         CurrentPage = page;
@@ -121,7 +122,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
 
     public override string GetTitle()
     {
-        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
+        if (ContentControl is {Content: AvaloniaDynamicContentPage page})
         {
             return page.GetTitle();
         }
@@ -131,7 +132,7 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
 
     public override bool GetHasNavigationBar()
     {
-        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
+        if (ContentControl is {Content: AvaloniaDynamicContentPage page})
         {
             return page.GetHasNavigationBar();
         }
@@ -139,17 +140,17 @@ public class AvaloniaNavigationPage : AvaloniaDynamicContentPage, Navigation.INa
         return false;
     }
 
-    public override IEnumerable<Control> GetPrimaryTopBarCommands() { return PrimaryTopBarCommands.Merge(ContentControl, page => page.GetPrimaryTopBarCommands()); }
+    public override IEnumerable<Control> GetPrimaryTopBarCommands() => PrimaryTopBarCommands.Merge(ContentControl, page => page.GetPrimaryTopBarCommands());
 
-    public override IEnumerable<Control> GetSecondaryTopBarCommands() { return SecondaryTopBarCommands.Merge(ContentControl, page => page.GetSecondaryTopBarCommands()); }
+    public override IEnumerable<Control> GetSecondaryTopBarCommands() => SecondaryTopBarCommands.Merge(ContentControl, page => page.GetSecondaryTopBarCommands());
 
-    public override IEnumerable<Control> GetPrimaryBottomBarCommands() { return PrimaryBottomBarCommands.Merge(ContentControl, page => page.GetPrimaryBottomBarCommands()); }
+    public override IEnumerable<Control> GetPrimaryBottomBarCommands() => PrimaryBottomBarCommands.Merge(ContentControl, page => page.GetPrimaryBottomBarCommands());
 
-    public override IEnumerable<Control> GetSecondaryBottomBarCommands() { return SecondaryBottomBarCommands.Merge(ContentControl, page => page.GetSecondaryBottomBarCommands()); }
+    public override IEnumerable<Control> GetSecondaryBottomBarCommands() => SecondaryBottomBarCommands.Merge(ContentControl, page => page.GetSecondaryBottomBarCommands());
 
     public bool GetHasBackButton()
     {
-        if (ContentControl != null && ContentControl.Content is AvaloniaDynamicContentPage page)
+        if (ContentControl is {Content: AvaloniaDynamicContentPage page})
         {
             return page.HasBackButton && StackDepth > 1;
         }

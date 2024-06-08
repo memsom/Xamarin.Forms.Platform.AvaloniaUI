@@ -4,28 +4,18 @@ using Xamarin.Forms.Xaml;
 namespace AvaloniaFormsTestbed;
 
 [XamlCompilation(XamlCompilationOptions.Compile)]
-public partial class MainPage : ContentPage
+public partial class MainPage
 {
     public MainPage()
     {
         InitializeComponent();
+
         BindingContext = this;
     }
 
-    private void Button_OnClicked(object? sender, EventArgs e)
+    private async void Button2_OnClicked(object? sender, EventArgs e)
     {
-        System.Diagnostics.Debug.WriteLine("hello, world");
-        Label1.Text = "Hello, world";
-    }
+        await Navigation.PushAsync(new Page2());
 
-    public IList<string> Items { get; } = new List<string>
-    {
-        "test1",
-        "test2",
-        "test3",
-        "test4",
-        "test5",
-        "test6",
-        "test7",
-    };
+    }
 }

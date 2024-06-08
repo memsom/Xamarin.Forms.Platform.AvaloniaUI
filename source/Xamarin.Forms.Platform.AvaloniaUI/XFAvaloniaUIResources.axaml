@@ -6,6 +6,13 @@
     xmlns:controls1="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Controls"
     xmlns:converters="clr-namespace:Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters">
 
+    <converters:SymbolToValueConverter x:Key="SymbolToValue" />
+    <converters:CaseConverter x:Key="LowerConverter" ConvertToUpper="False" />
+    <converters:CaseConverter x:Key="UpperConverter" ConvertToUpper="True" />
+    <converters:CollapseWhenEmptyConverter x:Key="CollapseWhenEmpty" />
+    <converters:HeightConverter x:Key="HeightConverter" />
+    <converters:ViewToRendererConverter x:Key="ViewToRenderer" />
+    
     <!-- Default Global Color -->
     <SolidColorBrush x:Key="WindowBackgroundColor" Color="White" />
     <SolidColorBrush x:Key="AccentColor" Color="#3498db" />
@@ -26,10 +33,7 @@
     <FontFamily x:Key="FontFamilyNormal">Segoe UI</FontFamily>
     <FontFamily x:Key="FontFamilySemiBold">Segoe UI</FontFamily>
 
-    <converters:SymbolToValueConverter x:Key="SymbolToValue" />
-    <converters:CaseConverter x:Key="LowerConverter" ConvertToUpper="False" />
-    <converters:CaseConverter x:Key="UpperConverter" ConvertToUpper="True" />
-    <converters:CollapseWhenEmptyConverter x:Key="CollapseWhenEmpty" />
+
 
     <system:Double x:Key="FontSizeExtraExtraSmall">12</system:Double>
     <system:Double x:Key="FontSizeExtraSmall">15</system:Double>
@@ -47,8 +51,7 @@
     <system:Double x:Key="FontSizeSubtitle">20</system:Double>
     <system:Double x:Key="FontSizeTitle">24</system:Double>
 
-    <converters:HeightConverter x:Key="HeightConverter" />
-    <converters:ViewToRendererConverter x:Key="ViewToRenderer" />
+
     <converters:ColorConverter x:Key="ColorConverter" />
     <converters:ColorMultiValueConverter x:Key="ColorMultiValueConverter" />
     <converters:ImageConverter x:Key="ImageConverter" />

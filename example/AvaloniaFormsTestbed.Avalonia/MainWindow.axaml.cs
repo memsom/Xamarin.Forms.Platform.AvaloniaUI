@@ -1,4 +1,3 @@
-using Avalonia.Controls;
 using Xamarin.Forms.Platform.AvaloniaUI;
 
 namespace AvaloniaFormsTestbed.Avalonia;
@@ -9,7 +8,7 @@ public partial class MainWindow : FormsApplicationPage
     {
         InitializeComponent();
 
-        Forms.Init();
+        Xamarin.Forms.Forms.Init();
         LoadApplication(new AvaloniaFormsTestbed.App());
     }
 }

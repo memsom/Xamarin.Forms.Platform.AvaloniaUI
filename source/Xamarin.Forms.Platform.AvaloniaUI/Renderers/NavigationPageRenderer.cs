@@ -45,7 +45,7 @@ public class NavigationPageRenderer : VisualPageRenderer<NavigationPage, FormsNa
         base.OnElementChanged(e);
     }
 
-    protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+    protected override void OnElementPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         base.OnElementPropertyChanged(sender, e);
 

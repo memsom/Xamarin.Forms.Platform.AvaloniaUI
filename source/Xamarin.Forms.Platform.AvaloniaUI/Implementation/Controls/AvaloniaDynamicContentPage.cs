@@ -5,6 +5,7 @@ using Avalonia.Controls;
 using Avalonia.Interactivity;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation;
+using IAvaloniaNavigation = Xamarin.Forms.Platform.AvaloniaUI.Implementation.Navigation.INavigation;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls;
 
@@ -104,7 +105,7 @@ public class AvaloniaDynamicContentPage : UserControl
     {
         get
         {
-            Navigation.INavigation nav = this.TryFindParent<AvaloniaNavigationPage>();
+            var nav = this.TryFindParent<AvaloniaNavigationPage>() as IAvaloniaNavigation;
             return nav ?? new DefaultNavigation();
         }
     }
@@ -138,8 +139,8 @@ public class AvaloniaDynamicContentPage : UserControl
         Disappearing();
     }
 
-    protected virtual void OnLoaded(RoutedEventArgs e) { Loaded?.Invoke(this, e); }
-    protected virtual void OnUnloaded(RoutedEventArgs e) { Unloaded?.Invoke(this, e); }
+    protected virtual void OnLoaded(RoutedEventArgs e) => Loaded?.Invoke(this, e);
+    protected virtual void OnUnloaded(RoutedEventArgs e) => Unloaded?.Invoke(this, e);
 
     #endregion
 
@@ -151,8 +152,8 @@ public class AvaloniaDynamicContentPage : UserControl
         SecondaryTopBarCommands.CollectionChanged += Commands_CollectionChanged;
         PrimaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
         SecondaryBottomBarCommands.CollectionChanged += Commands_CollectionChanged;
-        //ParentWindow?.SynchronizeToolbarCommands();
-        //ParentWindow?.SynchronizeAppBar();
+        ParentWindow?.SynchronizeToolbarCommands();
+        ParentWindow?.SynchronizeAppBar();
     }
 
     protected virtual void Disappearing()
@@ -183,29 +184,29 @@ public class AvaloniaDynamicContentPage : UserControl
             change.Property == TitleBarBackgroundColorProperty ||
             change.Property == TitleBarTextColorProperty)
         {
-            //ParentWindow?.SynchronizeAppBar();
+            ParentWindow?.SynchronizeAppBar();
         }
     }
 
 
     private void Commands_CollectionChanged(object? sender, NotifyCollectionChangedEventArgs e)
     {
-        //ParentWindow?.SynchronizeToolbarCommands();
+        ParentWindow?.SynchronizeToolbarCommands();
     }
 
     public virtual string GetTitle() { return Title; }
 
-    public virtual bool GetHasNavigationBar() { return HasNavigationBar; }
+    public virtual bool GetHasNavigationBar() => HasNavigationBar;
 
-    public virtual Avalonia.Media.Brush GetTitleBarBackgroundColor() { return TitleBarBackgroundColor; }
+    public virtual Avalonia.Media.Brush GetTitleBarBackgroundColor() => TitleBarBackgroundColor;
 
-    public virtual Avalonia.Media.Brush GetTitleBarTextColor() { return TitleBarTextColor; }
+    public virtual Avalonia.Media.Brush GetTitleBarTextColor() => TitleBarTextColor;
 
-    public virtual IEnumerable<Control> GetPrimaryTopBarCommands() { return PrimaryTopBarCommands; }
+    public virtual IEnumerable<Control> GetPrimaryTopBarCommands() => PrimaryTopBarCommands;
 
-    public virtual IEnumerable<Control> GetSecondaryTopBarCommands() { return SecondaryTopBarCommands; }
+    public virtual IEnumerable<Control> GetSecondaryTopBarCommands() => SecondaryTopBarCommands;
 
-    public virtual IEnumerable<Control> GetPrimaryBottomBarCommands() { return PrimaryBottomBarCommands; }
+    public virtual IEnumerable<Control> GetPrimaryBottomBarCommands() => PrimaryBottomBarCommands;
 
-    public virtual IEnumerable<Control> GetSecondaryBottomBarCommands() { return SecondaryBottomBarCommands; }
+    public virtual IEnumerable<Control> GetSecondaryBottomBarCommands() => SecondaryBottomBarCommands;
 }

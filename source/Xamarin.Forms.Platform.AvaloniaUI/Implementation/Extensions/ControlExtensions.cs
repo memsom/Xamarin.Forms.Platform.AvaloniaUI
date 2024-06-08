@@ -95,19 +95,23 @@ public static class ControlExtensions
 
         static AvaloniaProperty GetForegroundProperty(Control element)
         {
-            if (element is TemplatedControl)
-                return TemplatedControl.ForegroundProperty;
-            if (element is TextBlock)
-                return TextBlock.ForegroundProperty;
+            switch (element)
+            {
+                case TemplatedControl:
+                    return TemplatedControl.ForegroundProperty;
+                case TextBlock:
+                    return TextBlock.ForegroundProperty;
+            }
 
-            Type type = element.GetType();
+            var type = element.GetType();
 
-            AvaloniaProperty foregroundProperty;
-            if (!ForegroundProperties.Value.TryGetValue(type, out foregroundProperty))
+            if (!ForegroundProperties.Value.TryGetValue(type, out var foregroundProperty))
             {
                 var field = type?.GetFields().FirstOrDefault(f => f.Name == "ForegroundProperty");
-                if (field == null)
+                if (field is null)
+                {
                     throw new ArgumentException("type is not a Foregroundable type");
+                }
 
                 var property = (AvaloniaProperty)field.GetValue(null);
                 ForegroundProperties.Value.TryAdd(type, property);
@@ -136,13 +140,13 @@ public static class ControlExtensions
             }
         }
 
-    public static TopLevel GetParentWindow(this Control control)
+    public static Control? GetParentWindow(this Control control)
     {
         var topLevel = control;
         while(topLevel != null && !(topLevel is TopLevel))
         {
-            topLevel = (TopLevel)topLevel.Parent;
+            topLevel = topLevel.Parent as Control;
         }
-        return topLevel as TopLevel;
+        return topLevel;
     }
 }

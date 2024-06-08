@@ -5,7 +5,7 @@ namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
 public class KeyboardConverter : global::Avalonia.Data.Converters.IValueConverter
 {
-    public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+    public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture)
     {
         var keyboard = value as Keyboard;
         if (keyboard == null)
@@ -14,8 +14,5 @@ public class KeyboardConverter : global::Avalonia.Data.Converters.IValueConverte
         return keyboard.ToInputScope();
     }
 
-    public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
-    {
-        throw new NotImplementedException();
-    }
+    public object? ConvertBack(object? value, Type targetType, object? parameter, CultureInfo culture) => throw new NotImplementedException();
 }

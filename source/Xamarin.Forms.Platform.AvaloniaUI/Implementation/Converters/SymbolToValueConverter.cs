@@ -4,7 +4,7 @@ using Xamarin.Forms.Platform.AvaloniaUI.Implementation.Controls.Enums;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
-public class SymbolToValueConverter : IValueConverter
+public class SymbolToValueConverter : global::Avalonia.Data.Converters.IValueConverter
 {
     public object? Convert(object? value, Type targetType, object? parameter, CultureInfo culture) => value is Symbol symbol ? Char.ConvertFromUtf32((int)symbol) : null;
 

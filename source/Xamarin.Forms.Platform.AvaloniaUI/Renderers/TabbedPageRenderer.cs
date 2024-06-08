@@ -17,7 +17,10 @@ public class TabbedPageRenderer : VisualMultiPageRenderer<TabbedPage, Page, Form
         {
             if (Control == null) // construct and SetNativeControl and suscribe control event
             {
-                SetNativeControl(new FormsTabbedPage() { ContentLoader = new FormsContentLoader() });
+                SetNativeControl(new FormsTabbedPage
+                {
+                    ContentLoader = new FormsContentLoader()
+                });
             }
 
             UpdateBarBackgroundColor();

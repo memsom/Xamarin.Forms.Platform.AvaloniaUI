@@ -2,7 +2,7 @@ using System.Globalization;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation.Converters;
 
-public sealed class CaseConverter : IValueConverter
+public sealed class CaseConverter : global::Avalonia.Data.Converters.IValueConverter
 {
     public bool ConvertToUpper { get; set; }
 
