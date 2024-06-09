@@ -8,13 +8,13 @@
     <Application.Resources>
         <ResourceDictionary>
             <ResourceDictionary.MergedDictionaries>
-                <ResourceInclude Source="avares://Xamarin.Forms.Platform.AvaloniaUI/XFAvaloniaUI.axaml" />
+                <ResourceInclude Source="avares://Xamarin.Forms.Platform.AvaloniaUI/XFAvaloniaUIResources.axaml" />
             </ResourceDictionary.MergedDictionaries>
         </ResourceDictionary>
     </Application.Resources>
 
     <Application.Styles>
         <FluentTheme />
-
+        <StyleInclude Source="avares://Xamarin.Forms.Platform.AvaloniaUI/XFAvaloniaUIStyles.axaml"/>
     </Application.Styles>
 </Application>

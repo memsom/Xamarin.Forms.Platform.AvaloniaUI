@@ -30,7 +30,7 @@ public class PageRenderer : VisualPageRenderer<Page, FormsContentPage>
         base.OnElementChanged(e);
     }
 
-    protected override void OnElementPropertyChanged(object sender, PropertyChangedEventArgs e)
+    protected override void OnElementPropertyChanged(object? sender, PropertyChangedEventArgs e)
     {
         base.OnElementPropertyChanged(sender, e);
 
@@ -46,10 +46,7 @@ public class PageRenderer : VisualPageRenderer<Page, FormsContentPage>
         {
             if (Element is ContentPage page)
             {
-                if (currentView != null)
-                {
-                    currentView.Cleanup(); // cleanup old view
-                }
+                currentView?.Cleanup(); // cleanup old view
 
                 currentView = page.Content;
                 Control.Content = currentView != null ? Platform.GetOrCreateRenderer(currentView).GetNativeElement() : null;

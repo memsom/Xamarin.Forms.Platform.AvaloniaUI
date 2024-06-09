@@ -1,11 +1,13 @@
 using System.Reflection;
 using Xamarin.Forms.Internals;
+using Xamarin.Forms.Platform.AvaloniaUI;
 using Xamarin.Forms.Platform.AvaloniaUI.Extensions;
 using Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 using AvaloniaApplication = Avalonia.Application;
 using AvaloniaSolidColorBrush = Avalonia.Media.SolidColorBrush;
 
-namespace Xamarin.Forms.Platform.AvaloniaUI;
+// ReSharper disable once CheckNamespace
+namespace Xamarin.Forms;
 
 public static class Forms
 {
@@ -40,7 +42,7 @@ public static class Forms
         Device.Info = new AvaloniaDeviceInfo();
         ExpressionSearch.Default = new AvaloniaExpressionSearch();
 
-        Registrar.RegisterAll(new[] { typeof(ExportRendererAttribute), typeof(ExportCellAttribute), typeof(ExportImageSourceHandlerAttribute) });
+        Registrar.RegisterAll([typeof(ExportRendererAttribute), typeof(ExportCellAttribute), typeof(ExportImageSourceHandlerAttribute)]);
 
         Ticker.SetDefault(new AvaloniaTicker());
         Device.SetIdiom(TargetIdiom.Desktop);
