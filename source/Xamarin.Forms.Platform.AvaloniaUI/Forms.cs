@@ -7,7 +7,7 @@ using AvaloniaApplication = Avalonia.Application;
 using AvaloniaSolidColorBrush = Avalonia.Media.SolidColorBrush;
 
 // ReSharper disable once CheckNamespace
-namespace Xamarin.Forms;
+namespace Xamarin.Forms.Platform.AvaloniaUI;
 
 public static class Forms
 {

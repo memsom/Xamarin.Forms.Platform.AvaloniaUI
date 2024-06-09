@@ -1,0 +1,49 @@
+<Project Sdk="Microsoft.NET.Sdk">
+    <PropertyGroup>
+        <OutputType>Exe</OutputType>
+        <TargetFramework>net8.0-android</TargetFramework>
+        <SupportedOSPlatformVersion>21</SupportedOSPlatformVersion>
+        <Nullable>enable</Nullable>
+        <ApplicationId>com.CompanyName.AvaloniaTestbed</ApplicationId>
+        <ApplicationVersion>1</ApplicationVersion>
+        <ApplicationDisplayVersion>1.0</ApplicationDisplayVersion>
+        <AndroidPackageFormat>apk</AndroidPackageFormat>
+        <AndroidEnableProfiledAot>false</AndroidEnableProfiledAot>
+        <XamarinGoogleGuavaListenableFutureOptOut>true</XamarinGoogleGuavaListenableFutureOptOut>
+    </PropertyGroup>
+
+    <ItemGroup>
+        <AndroidResource Include="Icon.png">
+            <Link>Resources\drawable\Icon.png</Link>
+        </AndroidResource>
+    </ItemGroup>
+
+    <ItemGroup>
+        <PackageReference Include="Xamarin.AndroidX.Core.SplashScreen" Version="1.0.1.1"/>
+        <PackageReference Include="Xamarin.AndroidX.RecyclerView" Version="1.2.1.5"/>
+        <PackageReference Include="Avalonia" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Android" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.ReactiveUI" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Themes.Fluent" Version="11.0.10"/>
+        <PackageReference Include="Avalonia.Fonts.Inter" Version="11.0.10"/>
+        <!--Condition below is needed to remove Avalonia.Diagnostics package from build output in Release configuration.-->
+        <PackageReference Condition="'$(Configuration)' == 'Debug'" Include="Avalonia.Diagnostics" Version="11.0.10"/>
+        <PackageReference Include="Xamarin.Forms" Version="5.0.0.2662"/>
+    </ItemGroup>
+
+    <ItemGroup>
+        <ProjectReference Include="..\..\source\Xamarin.Forms.Platform.AvaloniaUI\Xamarin.Forms.Platform.AvaloniaUI.csproj" />
+        <ProjectReference Include="..\AvaloniaFormsTestbed\AvaloniaFormsTestbed.csproj" />
+    </ItemGroup>
+
+    <ItemGroup>
+      <Compile Update="App.axaml.cs">
+        <DependentUpon>App.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+      <Compile Update="MainWindow.axaml.cs">
+        <DependentUpon>MainWindow.axaml</DependentUpon>
+        <SubType>Code</SubType>
+      </Compile>
+    </ItemGroup>
+</Project>

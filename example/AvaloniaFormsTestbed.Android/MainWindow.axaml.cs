@@ -1,6 +1,6 @@
 using Xamarin.Forms.Platform.AvaloniaUI;
 
-namespace AvaloniaFormsTestbed.Avalonia;
+namespace AvaloniaFormsTestbed.Android;
 
 public partial class MainWindow : FormsApplicationPage
 {
