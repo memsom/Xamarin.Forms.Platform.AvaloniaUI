@@ -110,7 +110,7 @@ public class AvaloniaDynamicContentPage : UserControl
         }
     }
 
-    public ApplicationWindow? ParentWindow => this.GetParentWindow() as ApplicationWindow;
+    public ApplicationWindow? ParentWindow => this.GetUiHost() as ApplicationWindow;
 
     public AvaloniaDynamicContentPage()
     {

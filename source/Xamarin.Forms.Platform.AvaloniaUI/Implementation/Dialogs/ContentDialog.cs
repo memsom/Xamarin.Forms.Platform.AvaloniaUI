@@ -106,7 +106,7 @@ public class ContentDialog : ContentControl, IContentDialog
     public event EventHandler<ContentDialogButtonClickEventArgs> PrimaryButtonClick;
     public event EventHandler<ContentDialogButtonClickEventArgs> SecondaryButtonClick;
 
-    public ApplicationWindow ParentWindow => this.GetParentWindow() as ApplicationWindow;
+    public ApplicationWindow ParentWindow => this.GetUiHost() as ApplicationWindow;
 
     public ContentDialog()
     {

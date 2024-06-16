@@ -12,7 +12,7 @@ using AvaloniaContentPresenter = Avalonia.Controls.Presenters.ContentPresenter;
 
 namespace Xamarin.Forms.Platform.AvaloniaUI.Implementation;
 
-public class ApplicationWindow : Window, IUiHost
+public class ApplicationControl : UserControl, IUiHost
 {
     public static readonly StyledProperty<object> StartupPageProperty = AvaloniaProperty.Register<ApplicationWindow, object>(nameof(StartupPage));
 
@@ -37,7 +37,13 @@ public class ApplicationWindow : Window, IUiHost
     public static readonly StyledProperty<AvaloniaMasterDetailPage?> CurrentMasterDetailPageProperty = AvaloniaProperty.Register<ApplicationWindow, AvaloniaMasterDetailPage?>(nameof(CurrentMasterDetailPage));
     public static readonly StyledProperty<ContentDialog?> CurrentContentDialogProperty = AvaloniaProperty.Register<ApplicationWindow, ContentDialog?>(nameof(CurrentContentDialog));
 
-    static ApplicationWindow() { }
+    /// <summary>
+    /// Defines the <see cref="Title"/> property.
+    /// </summary>
+    public static readonly StyledProperty<string?> TitleProperty =
+        AvaloniaProperty.Register<Window, string?>(nameof(Title), "Window");
+
+    static ApplicationControl() { }
 
     protected override Type StyleKeyOverride => typeof(ApplicationWindow);
 
@@ -49,6 +55,12 @@ public class ApplicationWindow : Window, IUiHost
     AvaloniaButton? hamburgerButton;
 
     public AvaloniaContentPresenter? ContentDialogContentPresenter { get; private set; }
+
+    public string? Title
+    {
+        get => GetValue(TitleProperty);
+        set => SetValue(TitleProperty, value);
+    }
 
     public AvaloniaBrush TitleBarBackgroundColor
     {
@@ -154,7 +166,9 @@ public class ApplicationWindow : Window, IUiHost
     }
 
 
-    public ApplicationWindow()
+    public EventHandler? Opened;
+    public EventHandler? Closed;
+    public ApplicationControl()
     {
         this.Opened += (sender, e) => Appearing();
         this.Closed += (sender, e) => Disappearing();

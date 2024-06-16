@@ -140,10 +140,10 @@ public static class ControlExtensions
             }
         }
 
-    public static Control? GetParentWindow(this Control control)
+    public static Control? GetUiHost(this Control control)
     {
         var topLevel = control;
-        while(topLevel != null && !(topLevel is TopLevel))
+        while(topLevel != null && !(topLevel is IUiHost))
         {
             topLevel = topLevel.Parent as Control;
         }

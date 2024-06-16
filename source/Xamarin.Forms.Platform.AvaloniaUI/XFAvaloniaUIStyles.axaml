@@ -131,14 +131,14 @@
                                 Name="PART_System_Title" Margin="15,0,0,0" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"
                                 FontSize="14" Opacity="1" Foreground="{DynamicResource CommandBarTextColor}" />
 
-                            <formsImplementationControls:AvaloniaWindowButtons
-                                Name="PART_WindowButtonCommands"
-                                IsVisible="{Binding !HasSystemDecorations}"
-                                Focusable="False" HorizontalAlignment="Right"
-                                VerticalAlignment="Center" Opacity="1"
-                                UseLayoutRounding="True"
-                                Height="20"
-                                Foreground="{DynamicResource CommandBarTextColor}" />
+                            <!-- <formsImplementationControls:AvaloniaWindowButtons -->
+                            <!--     Name="PART_WindowButtonCommands" -->
+                            <!--     IsVisible="{Binding !HasSystemDecorations}" -->
+                            <!--     Focusable="False" HorizontalAlignment="Right" -->
+                            <!--     VerticalAlignment="Center" Opacity="1" -->
+                            <!--     UseLayoutRounding="True" -->
+                            <!--     Height="20" -->
+                            <!--     Foreground="{DynamicResource CommandBarTextColor}" /> -->
                         </Grid>
 
                         <formsControls:FormsCommandBar
@@ -187,6 +187,86 @@
     </Style>
 
     <Style Selector="formsImplementation|ApplicationWindow /template/ Button, formsControls|FormsCommandBar /template/ Button:pointerover">
+        <Setter Property="Background" Value="{DynamicResource CommandBarBackgroundColor}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource CommandBarBackgroundColor}" />
+        <Setter Property="Foreground" Value="{DynamicResource CommandBarTextColor}" />
+    </Style>
+
+    <Style Selector="formsImplementation|ApplicationControl">
+        <Setter Property="VerticalAlignment" Value="Center" />
+        <Setter Property="Template">
+            <ControlTemplate x:DataType="formsImplementation:ApplicationControl">
+                <Border
+                    Name="BorderWindow"
+                    Background="{Binding Background}"
+                    BorderBrush="{DynamicResource CommandBarBackgroundColor}"
+                    BorderThickness="1">
+
+                    <Grid RowDefinitions="Auto,Auto,*,Auto">
+
+                        <Grid
+                            Name="PART_CommandsBar" Grid.Row="0" Height="24" VerticalAlignment="Center"
+                            IsVisible="{Binding HasBackButtonModal}"
+                            Background="{DynamicResource CommandBarBackgroundColor}">
+
+                            <Button
+                                Name="PART_Previous_Modal" Focusable="False"
+                                IsVisible="{Binding HasBackButtonModal}"
+                                HorizontalAlignment="Left">
+                                <formsImplementationControls:AvaloniaSymbolIcon Symbol="ChevronFlipLeftLegacy" FontSize="12" />
+                            </Button>
+
+                            <TextBlock
+                                Name="PART_System_Title" Margin="15,0,0,0" Text="{Binding Title}" HorizontalAlignment="Center" VerticalAlignment="Center"
+                                FontSize="14" Opacity="1" Foreground="{DynamicResource CommandBarTextColor}" />
+                        </Grid>
+
+                        <formsControls:FormsCommandBar
+                            Name="PART_TopAppBar" Grid.Row="1" Background="{Binding TitleBarBackgroundColor}"
+                            IsVisible="{Binding HasNavigationBar}"
+                            Foreground="{Binding TitleBarTextColor}"
+                            Height="30">
+                            <Grid>
+                                <StackPanel
+                                    Grid.Column="0" Orientation="Horizontal" Height="30" Focusable="False" HorizontalAlignment="Left" VerticalAlignment="Center"
+                                    UseLayoutRounding="True">
+                                    <Button Name="PART_Hamburger" Focusable="False">
+                                        <formsImplementationControls:AvaloniaSymbolIcon Symbol="GlobalNavigationButton" FontSize="16" />
+                                    </Button>
+
+                                    <Button Name="PART_Previous" Focusable="False" IsEnabled="True" IsVisible="{Binding HasBackButton}">
+                                        <StackPanel Orientation="Horizontal">
+                                            <formsImplementationControls:AvaloniaSymbolIcon Symbol="ChevronFlipLeftLegacy" />
+                                            <TextBlock Margin="5,0,0,0" Text="{Binding BackButtonTitle}" FontSize="14" HorizontalAlignment="Center" VerticalAlignment="Center" />
+                                        </StackPanel>
+                                    </Button>
+                                </StackPanel>
+
+                                <TextBlock Grid.Column="0" Text="{Binding CurrentTitle}" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22" />
+                            </Grid>
+
+                        </formsControls:FormsCommandBar>
+
+                        <formsImplementationControls:AvaloniaDynamicContentControl
+                            Name="PART_ContentControl" Grid.Row="2" ContentLoader="{Binding ContentLoader}" Source="{Binding StartupPage}"
+                            IsVisible="{Binding !HasModalPage}" />
+
+                        <formsImplementationControls:AvaloniaTransitioningContentControl
+                            Name="PART_ModalContentControl" Grid.Row="1" Grid.RowSpan="3" Transition="Up" ContentLoader="{Binding ContentLoader}"
+                            Source="{Binding CurrentModalPage}" IsVisible="{Binding HasModalPage}" />
+
+                        <Grid Name="PART_Popup" Grid.Row="1" Grid.RowSpan="3" Background="#99000000" IsVisible="{Binding HasContentDialog}">
+                            <ContentPresenter Name="PART_ContentDialog_ContentPresenter" VerticalAlignment="Center" />
+                        </Grid>
+
+                        <formsControls:FormsCommandBar Name="PART_BottomAppBar" Grid.Row="3" IsVisible="{Binding HasBottomAppBar}" Background="{Binding TitleBarBackgroundColor}" />
+                    </Grid>
+                </Border>
+            </ControlTemplate>
+        </Setter>
+    </Style>
+
+    <Style Selector="formsImplementation|ApplicationControl /template/ Button, formsControls|FormsCommandBar /template/ Button:pointerover">
         <Setter Property="Background" Value="{DynamicResource CommandBarBackgroundColor}" />
         <Setter Property="BorderBrush" Value="{DynamicResource CommandBarBackgroundColor}" />
         <Setter Property="Foreground" Value="{DynamicResource CommandBarTextColor}" />
@@ -842,44 +922,44 @@
         </Style.Animations>
     </Style>
 
-    <Style Selector="formsImplementationControls|AvaloniaWindowButtons">
-        <Setter Property="VerticalAlignment" Value="Center" />
-        <Setter Property="Template">
-            <ControlTemplate>
-                <StackPanel Orientation="Horizontal">
-                    <Button x:Name="PART_Min"
-                            Focusable="False"
-                            IsEnabled="True">
-                        <Path Data="F1M0,6L0,9 9,9 9,6 0,6z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                    </Button>
-                    <Button x:Name="PART_Max"
-                            Focusable="False"
-                            IsEnabled="True">
-                        <!-- normal state -->
-                        <Path
-                            x:Name="PART_MaxPath"
-                            Width="10"
-                            Height="10"
-                            Data="F1M0,0L0,9 9,9 9,0 0,0 0,3 8,3 8,8 1,8 1,3z"
-                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                    </Button>
-                    <Button
-                        x:Name="PART_Close"
-                        Focusable="False">
-                        <Path
-                            Data="M 10.009,1.704 L 8.331,0.026 5.03,3.327 1.703,0 0,1.704 3.326,5.031 0.025,8.332 1.703,10.009 5.004,6.708 8.305,10.009 10.009,8.305 6.708,5.005"
-                            Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" />
-                    </Button>
-                </StackPanel>
-            </ControlTemplate>
-        </Setter>
-    </Style>
-    <Style Selector="formsImplementationControls|AvaloniaWindowButtons /template/ Button">
-        <Setter Property="Background" Value="{DynamicResource CommandBarBackgroundColor}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource CommandBarBackgroundColor}" />
-        <Setter Property="Foreground" Value="{DynamicResource CommandBarTextColor}" />
-    </Style>
-    <Style Selector="formsImplementationControls|AvaloniaWindowButtons /template/ Button#PART_Close:pointerover">
-        <Setter Property="Background" Value="Red" />
-    </Style>
+    <!-- <Style Selector="formsImplementationControls|AvaloniaWindowButtons"> -->
+    <!--     <Setter Property="VerticalAlignment" Value="Center" /> -->
+    <!--     <Setter Property="Template"> -->
+    <!--         <ControlTemplate> -->
+    <!--             <StackPanel Orientation="Horizontal"> -->
+    <!--                 <Button x:Name="PART_Min" -->
+    <!--                         Focusable="False" -->
+    <!--                         IsEnabled="True"> -->
+    <!--                     <Path Data="F1M0,6L0,9 9,9 9,6 0,6z" Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" /> -->
+    <!--                 </Button> -->
+    <!--                 <Button x:Name="PART_Max" -->
+    <!--                         Focusable="False" -->
+    <!--                         IsEnabled="True"> -->
+    <!--                     ~1~ normal state @1@ -->
+    <!--                     <Path -->
+    <!--                         x:Name="PART_MaxPath" -->
+    <!--                         Width="10" -->
+    <!--                         Height="10" -->
+    <!--                         Data="F1M0,0L0,9 9,9 9,0 0,0 0,3 8,3 8,8 1,8 1,3z" -->
+    <!--                         Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" /> -->
+    <!--                 </Button> -->
+    <!--                 <Button -->
+    <!--                     x:Name="PART_Close" -->
+    <!--                     Focusable="False"> -->
+    <!--                     <Path -->
+    <!--                         Data="M 10.009,1.704 L 8.331,0.026 5.03,3.327 1.703,0 0,1.704 3.326,5.031 0.025,8.332 1.703,10.009 5.004,6.708 8.305,10.009 10.009,8.305 6.708,5.005" -->
+    <!--                         Fill="{Binding Path=Foreground, RelativeSource={RelativeSource AncestorType={x:Type Button}}}" /> -->
+    <!--                 </Button> -->
+    <!--             </StackPanel> -->
+    <!--         </ControlTemplate> -->
+    <!--     </Setter> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="formsImplementationControls|AvaloniaWindowButtons /template/ Button"> -->
+    <!--     <Setter Property="Background" Value="{DynamicResource CommandBarBackgroundColor}" /> -->
+    <!--     <Setter Property="BorderBrush" Value="{DynamicResource CommandBarBackgroundColor}" /> -->
+    <!--     <Setter Property="Foreground" Value="{DynamicResource CommandBarTextColor}" /> -->
+    <!-- </Style> -->
+    <!-- <Style Selector="formsImplementationControls|AvaloniaWindowButtons /template/ Button#PART_Close:pointerover"> -->
+    <!--     <Setter Property="Background" Value="Red" /> -->
+    <!-- </Style> -->
 </Styles>

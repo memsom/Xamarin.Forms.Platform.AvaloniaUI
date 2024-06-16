@@ -16,7 +16,7 @@ public abstract class Platform : BindableObject, INavigation
 {
     private readonly ContentControl? pageInstance;
 
-    ApplicationWindow? ParentWindow => pageInstance?.GetParentWindow() as ApplicationWindow;
+    ApplicationWindow? ParentWindow => pageInstance?.GetUiHost() as ApplicationWindow;
 
     private Page Page { get; set; }
 
